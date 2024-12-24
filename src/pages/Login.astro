@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Routico from '../components/icons/Routico.astro'
+---
+
+<Layout title='Crear una cuenta'>
+  <header class='p-3'>
+    <h1
+      class='flex gap-2 items-center text-4xl font-bold mx-auto justify-center text-azur-800'
+    >
+      ROUTICO <Routico class='w-11' />
+    </h1>
+  </header>
+  <main class='p-3'>
+    <h1>Iniciar Sesión</h1>
+    <section>
+      <form action=''>
+        <label for='name'>Name</label>
+        <input type='text' id='name' name='name' required />
+        <label for='email'>Email</label>
+        <input type='email' id='email' name='email' required />
+        <label for='password'>Password</label>
+        <input type='password' id='password' name='password' required />
+        <button type='submit'>Register</button>
+      </form>
+    </section>
+  </main>
+</Layout>
