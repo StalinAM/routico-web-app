@@ -1,1 +1,60 @@
-<h2>Rutas</h2>
+---
+import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
+import MapAdd from '../../components/icons/MapAdd.astro'
+---
+
+<LayoutAdmin>
+  <main>
+    <h2 class='py-4 px-4 text-xl font-medium'>Lista de rutas</h2>
+
+    <section class='flex flex-col gap-y-4'>
+      <div class='px-3 flex justify-between items-center'>
+        <label for='search' class='text-sm text-gray-500'>
+          <input
+            type='text'
+            id='search'
+            name='search'
+            class='border-2 border-gray-200 rounded-xl py-2 px-4'
+            placeholder='Buscar por nombre'
+          />
+        </label>
+        <button
+          class='flex items-center gap-x-1 bg-azur-600 text-azur-50/80 border rounded-xl py-2 px-4 hover:bg-azur-800 hover:text-azur-50'
+        >
+          <MapAdd />
+          Agregar
+        </button>
+      </div>
+
+      <table class='w-full'>
+        <thead class='border-b'>
+          <tr
+            class='grid grid-cols-[1fr_1fr_110px_110px_110px] lg:grid-cols-[1fr_1fr_1fr_1fr_110px] text-left text-sm [&_th]:font-medium text-gray-600 border-b py-3 px-4'
+          >
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Direccion</th>
+            <th>Contraseña</th>
+            <th>Editar</th>
+          </tr>
+        </thead>
+        <tbody class='grid p-3'>
+          <tr
+            class='grid p-1 items-center grid-cols-[1fr_1fr_110px_110px_110px] lg:grid-cols-[1fr_1fr_1fr_1fr_110px] border-b border-gray-200'
+          >
+            <td>Carlos Guaman</td>
+            <td>carlos@gmail.com</td>
+            <td>*********</td>
+            <td>0978657839</td>
+            <td
+              ><button
+                class='w-full py-1 text-azur-50/90 bg-azur-600 rounded-xl hover:text-azur-600 hover:bg-azur-400'
+                >Activo</button
+              ></td
+            >
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</LayoutAdmin>
