@@ -1,0 +1,57 @@
+---
+import Desktop from '../components/icons/Desktop.astro'
+import Maps from '../components/icons/Maps.astro'
+import Card from '../components/icons/Card.astro'
+import Help from '../components/icons/Help.astro'
+import Users from '../components/icons/Users.astro'
+const ItemsMenu = [
+  {
+    name: 'Principal',
+    icon: Desktop,
+    url: '/admin'
+  },
+  {
+    name: 'Rutas',
+    icon: Maps,
+    url: '/admin/routes'
+  },
+  {
+    name: 'Conductores',
+    icon: Users,
+    url: '/admin/drivers'
+  },
+  {
+    name: 'Planes',
+    icon: Card,
+    url: '/admin/payment'
+  },
+  {
+    name: 'Ayuda',
+    icon: Help,
+    url: '/admin/help'
+  }
+]
+const currentPath = Astro.url.pathname
+---
+
+<aside
+  class='absolute bottom-4 left-1/2 transform -translate-x-1/2 p-3 border rounded-xl bg-azur-300 sm:relative sm:bottom-0 sm:rounded-none sm:border-l-0 sm:border-t-0 sm:border-b-0 sm:border-r'
+>
+  <nav>
+    <ul class='flex sm:flex-col gap-x-3 sm:gap-y-2'>
+      {
+        ItemsMenu.map((item) => (
+          <li class=''>
+            <a
+              href={item.url}
+              class={`flex gap-2 items-center py-2 px-2 hover:bg-azur-800 rounded-xl hover:text-azur-50/90 cursor-pointer ${currentPath === item.url ? 'bg-azur-800 text-azur-50' : ''}`}
+            >
+              <item.icon />
+              <span class='hidden md:block'>{item.name}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</aside>
