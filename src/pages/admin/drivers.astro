@@ -1,10 +1,11 @@
 ---
+import AddDriver from '../../components/AddDriver.astro'
 import UserAdd from '../../components/icons/UserAdd.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
 ---
 
 <LayoutAdmin>
-  <main>
+  <main class='relative'>
     <h2 class='py-4 px-4 text-xl font-medium'>Lista de conductores</h2>
 
     <section class='flex flex-col gap-y-4'>
@@ -70,5 +71,6 @@ import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
         </tbody>
       </table>
     </section>
+    <AddDriver />
   </main>
 </LayoutAdmin>
