@@ -35,10 +35,10 @@ const currentPath = Astro.url.pathname
 ---
 
 <aside
-  class='absolute bottom-4 left-1/2 transform -translate-x-1/2 p-3 border rounded-xl bg-azur-300 sm:relative sm:bottom-0 sm:rounded-none sm:border-l-0 sm:border-t-0 sm:border-b-0 sm:border-r'
+  class='fixed w-full z-10 border-azur-400 border-t bottom-0 left-1/2 transform -translate-x-1/2 rounded-xl bg-azur-50 sm:relative sm:bottom-0 p-4 sm:rounded-none sm:border-l-0 sm:border-t-0 sm:border-b-0 sm:border-r'
 >
   <nav>
-    <ul class='flex sm:flex-col gap-x-3 sm:gap-y-2'>
+    <ul class='flex justify-around sm:flex-col sm:gap-y-4'>
       {
         ItemsMenu.map((item) => (
           <li class=''>
