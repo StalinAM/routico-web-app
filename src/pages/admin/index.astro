@@ -1,14 +1,31 @@
 ---
-import Card from '../../components/icons/Card.astro'
-import Desktop from '../../components/icons/Desktop.astro'
-import Help from '../../components/icons/Help.astro'
-import Maps from '../../components/icons/Maps.astro'
-import User from '../../components/icons/User.astro'
-import Logo from '../../components/Logo.astro'
-import Layout from '../../layouts/Layout.astro'
+import MapPoints from '../../components/icons/MapPoints.astro'
+import UserGroup from '../../components/icons/UserGroup.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
 ---
 
 <LayoutAdmin>
-  <h2>Principal</h2>
+  <main class='relative bg-azur-200/20 p-6 flex flex-col gap-6'>
+    <h2 class='text-xl font-medium'>Resumen</h2>
+    <section class='bg-azur-50 rounded-xl p-4 flex justify-around'>
+      <div class='flex items-center gap-x-4'>
+        <div class='rounded-full bg-azur-400 p-5'>
+          <UserGroup class='w-12 h-12 text-azur-600' />
+        </div>
+        <div>
+          <h2 class='text-gray-500 text-center text-lg'>Conductores</h2>
+          <p class='text-5xl text-azur-600 font-bold'>10</p>
+        </div>
+      </div>
+      <div class='flex items-center gap-x-4'>
+        <div class='rounded-full bg-azur-400 p-5'>
+          <MapPoints class='w-12 h-12 text-azur-600' />
+        </div>
+        <div>
+          <h2 class='text-gray-500 text-center text-lg'>Rutas</h2>
+          <p class='text-5xl text-azur-600 font-bold'>5</p>
+        </div>
+      </div>
+    </section>
+  </main>
 </LayoutAdmin>
