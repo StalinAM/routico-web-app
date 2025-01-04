@@ -2,28 +2,18 @@
 import AddDriver from '../../components/AddDriver.astro'
 import Search from '../../components/icons/Search.astro'
 import UserAdd from '../../components/icons/UserAdd.astro'
+import InputFilter from '../../components/InputFilter.astro'
+import Main from '../../components/Main.astro'
+import MainTitle from '../../components/MainTitle.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
 ---
 
 <LayoutAdmin>
-  <main class='relative bg-azur-200/20 p-6 flex flex-col gap-6'>
-    <h2 class='text-xl font-medium'>Lista de conductores</h2>
+  <Main>
+    <MainTitle title='Lista de conductores' />
 
-    <section class='flex justify-between items-center'>
-      <label for='search' class='relative text-sm text-gray-500'>
-        <div
-          class='absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none'
-        >
-          <Search class='w-4' />
-        </div>
-        <input
-          type='text'
-          id='search'
-          name='search'
-          class='border bg-azur-50 border-gray-200 rounded-xl py-2 pl-8 pr-4'
-          placeholder='Buscar por nombre'
-        />
-      </label>
+    <section class='flex justify-between gap-x-2 items-center'>
+      <InputFilter />
       <button
         class='flex items-center gap-x-1 bg-azur-600 text-azur-50/80 border rounded-xl py-2 px-4 hover:bg-azur-800 hover:text-azur-50'
       >
@@ -32,51 +22,25 @@ import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
       </button>
     </section>
 
-    <section class='flex flex-col gap-y-4 bg-azur-50 rounded-xl border h-full'>
-      <table class='w-full'>
-        <thead>
-          <tr
-            class='grid grid-cols-[1fr_1fr_110px_110px_110px] lg:grid-cols-[1fr_1fr_1fr_1fr_110px] text-left text-sm [&_th]:font-medium text-gray-600 border-b py-3 px-4'
-          >
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Contraseña</th>
-            <th>Teléfono</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody class='grid p-3'>
-          <tr
-            class='grid p-1 items-center grid-cols-[1fr_1fr_110px_110px_110px] lg:grid-cols-[1fr_1fr_1fr_1fr_110px] border-b border-gray-200'
-          >
-            <td>Carlos Guaman</td>
-            <td>carlos@gmail.com</td>
-            <td>*********</td>
-            <td>0978657839</td>
-            <td
-              ><button
-                class='w-full py-1 text-azur-50/90 bg-azur-600 rounded-xl hover:text-azur-600 hover:bg-azur-400'
-                >Activo</button
-              ></td
+    <section
+      class='flex flex-col w-full gap-y-4 bg-azur-50 rounded-xl border overflow-hidden'
+    >
+      <div class='overflow-x-scroll'>
+        <table class='w-full'>
+          <thead>
+            <tr
+              class='grid grid-cols-[minmax(max-content,_1fr),minmax(60px,_1fr),minmax(60px,_1fr),minmax(60px,_1fr),minmax(80px,_110px)] gap-4 text-left text-sm [&_th]:font-medium text-gray-600 border-b py-3 px-4'
             >
-          </tr>
-          <tr
-            class='grid p-1 items-center grid-cols-[1fr_1fr_110px_110px_110px] lg:grid-cols-[1fr_1fr_1fr_1fr_110px] border-b border-gray-200'
-          >
-            <td>Carlos</td>
-            <td>carlos@gmail.com</td>
-            <td>*********</td>
-            <td>1234567890</td>
-            <td
-              ><button
-                class='w-full py-1 text-azur-600 bg-azur-400 rounded-xl hover:text-azur-50/90 hover:bg-azur-600'
-                >Inactivo</button
-              ></td
-            >
-          </tr>
-        </tbody>
-      </table>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Contraseña</th>
+              <th>Teléfono</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </section>
     <!-- <AddDriver /> -->
-  </main>
+  </Main>
 </LayoutAdmin>

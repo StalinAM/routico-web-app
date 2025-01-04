@@ -1,14 +1,13 @@
 ---
 import Check from '../../components/icons/Check.astro'
+import Main from '../../components/Main.astro'
+import MainTitle from '../../components/MainTitle.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
 ---
 
 <LayoutAdmin>
-  <main
-    class='relative bg-azur-200/20 px-6 pt-6 pb-16 sm:pb-6 flex flex-col gap-6'
-  >
-    <h2 class='text-xl font-medium'>Mejora tu plan</h2>
-
+  <Main>
+    <MainTitle title='Mejora tu plan' />
     <section class='grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6'>
       <article class='bg-azur-50 border rounded-xl'>
         <header class='flex flex-col items-center border-b p-6 gap-y-2'>
@@ -106,5 +105,5 @@ import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
         </main>
       </article>
     </section>
-  </main>
+  </Main>
 </LayoutAdmin>
