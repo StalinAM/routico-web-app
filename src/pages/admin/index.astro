@@ -1,31 +1,27 @@
 ---
 import MapPoints from '../../components/icons/MapPoints.astro'
 import UserGroup from '../../components/icons/UserGroup.astro'
+import MainTitle from '../../components/MainTitle.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
+import Circle from '../../components/Circle.astro'
+import Main from '../../components/Main.astro'
 ---
 
 <LayoutAdmin>
-  <main class='relative bg-azur-200/20 p-6 flex flex-col gap-6'>
-    <h2 class='text-xl font-medium'>Resumen</h2>
-    <section class='bg-azur-50 rounded-xl p-4 flex justify-around'>
-      <div class='flex items-center gap-x-4'>
-        <div class='rounded-full bg-azur-400 p-5'>
-          <UserGroup class='w-12 h-12 text-azur-600' />
-        </div>
-        <div>
-          <h2 class='text-gray-500 text-center text-lg'>Conductores</h2>
-          <p class='text-5xl text-azur-600 font-bold'>10</p>
-        </div>
-      </div>
-      <div class='flex items-center gap-x-4'>
-        <div class='rounded-full bg-azur-400 p-5'>
-          <MapPoints class='w-12 h-12 text-azur-600' />
-        </div>
-        <div>
-          <h2 class='text-gray-500 text-center text-lg'>Rutas</h2>
-          <p class='text-5xl text-azur-600 font-bold'>5</p>
-        </div>
-      </div>
+  <Main>
+    <MainTitle title='Resumen' />
+    <section
+      class='bg-azur-50 rounded-xl p-4 flex flex-wrap gap-4 lg:justify-around'
+    >
+      <Circle title='Conductores' amount='10'>
+        <UserGroup class='w-10 h-10 text-azur-600' />
+      </Circle>
+      <Circle title='Rutas' amount='5'>
+        <MapPoints class='w-10 h-10 text-azur-600' />
+      </Circle>
+      <Circle title='Total dinero' amount='1000'>
+        <MapPoints class='w-10 h-10 text-azur-600' />
+      </Circle>
     </section>
-  </main>
+  </Main>
 </LayoutAdmin>
