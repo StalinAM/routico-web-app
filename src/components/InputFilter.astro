@@ -1,0 +1,18 @@
+---
+import Search from './icons/Search.astro'
+---
+
+<label for='search' class='relative text-sm text-gray-500'>
+  <div
+    class='absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none'
+  >
+    <Search class='w-4' />
+  </div>
+  <input
+    type='text'
+    id='search'
+    name='search'
+    class='border bg-azur-50 border-gray-200 rounded-xl py-2 pl-8 pr-4 w-full'
+    placeholder='Buscar por nombre'
+  />
+</label>
