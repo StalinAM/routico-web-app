@@ -1,0 +1,13 @@
+---
+const { title, amount } = Astro.props
+---
+
+<div class='flex items-center gap-x-4'>
+  <div class='rounded-full bg-azur-400 p-5'>
+    <slot />
+  </div>
+  <div>
+    <h2 class='text-gray-500 text-center text-lg'>{title}</h2>
+    <p class='text-4xl text-azur-600 font-bold'>{amount}</p>
+  </div>
+</div>
