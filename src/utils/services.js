@@ -1,91 +1,38 @@
 import {
-  createUserWithEmailAndPassword,
+  getAuth,
+  inMemoryPersistence,
   signInWithEmailAndPassword,
-  updateProfile
-} from 'firebase/auth'
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  query,
-  setDoc,
-  where
-} from 'firebase/firestore'
-import { auth, db } from '../lib/firebase/firebase'
-import { useAuthStore } from '../store/useAuthStore'
+} from "firebase/auth";
+import { app } from "../lib/firebase/client";
 
-export const registerUser = async (
-  name,
-  email,
-  password,
-  navigate,
-  setError
-) => {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    )
-    await updateProfile(userCredential.user, {
-      displayName: name
-    })
-    navigate('/dashboard/overview')
-  } catch (error) {
-    if (error.code === 'auth/email-already-in-use')
-      setError('El correo electrónico ya está registrado.')
+const auth = getAuth(app);
+// This will prevent the browser from storing session data
+auth.setPersistence(inMemoryPersistence);
+
+const form = document.querySelector("form");
+export const signIn = form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const email = formData.get("email")?.toString();
+  const password = formData.get("password")?.toString();
+
+  if (!email || !password) {
+    return;
   }
-}
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
+  const idToken = await userCredential.user.getIdToken();
+  const response = await fetch("/api/auth/login", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${idToken}`,
+    },
+  });
 
-export const loginUser = async (email, password) => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    )
-    return userCredential.user
-  } catch (error) {
-    console.error('Error en loginUser:', error)
-    throw error
+  if (response.redirected) {
+    window.location.assign(response.url);
   }
-}
-
-export const logoutUser = async () => {
-  try {
-    await auth.signOut()
-  } catch (error) {
-    console.log(error)
-  }
-}
-export const insertNewTransaction = async (transaction) => {
-  try {
-    const transactionsRef = collection(db, 'transactions')
-    await addDoc(transactionsRef, transaction)
-  } catch (e) {
-    console.log(e)
-  }
-}
-export const fetchTransactions = async (uid) => {
-  const transactions = []
-  const q = query(collection(db, 'transactions'), where('uid', '==', uid))
-
-  const querySnapshot = await getDocs(q)
-
-  querySnapshot.forEach((doc) => {
-    const transaction = { ...doc.data() }
-    transaction.docId = doc.id
-
-    transactions.push(transaction)
-  })
-  return transactions
-}
-
-export const deleteTransaction = async (docId) => {
-  await deleteDoc(doc(db, 'transactions', docId))
-}
-export const updateTransaction = async (docId, transaction) => {
-  const res = await setDoc(doc(db, 'transactions', docId), transaction)
-}
+});
