@@ -1,19 +1,34 @@
+export const prerender = false
 import type { APIRoute } from 'astro'
-import { auth } from '../../../lib/firebase/server'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { app } from '../../../lib/firebase/server'
+import { getAuth } from 'firebase-admin/auth'
 
-export const POST: APIRoute = async ({ redirect, request, cookies }) => {
-  const formData = await request.formData()
-  const email = formData.get('email')?.toString()
-  const password = formData.get('password')?.toString()
-  const provider = formData.get('provider')?.toString()
+export const GET: APIRoute = async ({ request, cookies, redirect }) => {
+  const auth = getAuth(app)
 
-  if (!email || !password) {
-    return new Response('Email and password are required', { status: 400 })
+  /* Get token from request headers */
+  const idToken = request.headers.get('Authorization')?.split('Bearer ')[1]
+  if (!idToken) {
+    return new Response('No token found', { status: 401 })
+  }
+  console.log('idToken', idToken)
+
+  /* Verify id token */
+  try {
+    await auth.verifyIdToken(idToken)
+  } catch (error) {
+    return new Response('Invalid token', { status: 401 })
   }
 
-  const userCredential = await signInWithEmailAndPassword(auth, email, password)
-  return userCredential.user
+  /* Create and set session cookie */
+  const fiveDays = 60 * 60 * 24 * 5 * 1000
+  const sessionCookie = await auth.createSessionCookie(idToken, {
+    expiresIn: fiveDays
+  })
+
+  cookies.set('__session', sessionCookie, {
+    path: '/'
+  })
 
   return redirect('/admin')
 }
