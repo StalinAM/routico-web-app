@@ -1,7 +1,7 @@
 ---
 import '@fontsource-variable/onest'
-import Logo from '../components/Logo.astro'
 import Sidebar from '../components/Sidebar.astro'
+import Header from '../components/Header.astro'
 ---
 
 <!doctype html>
@@ -16,14 +16,7 @@ import Sidebar from '../components/Sidebar.astro'
   <body
     class='overflow-x-hidden grid grid-cols-[1fr] sm:grid-cols-[auto_1fr] md:grid-cols-[210px_1fr] grid-rows-[52px_1fr]'
   >
-    <header
-      class='flex items-center justify-between py-3 px-6 [&_svg]:w-8 row-start-1 col-start-1 col-end-4 border-b border-azur-300'
-    >
-      <Logo
-        class='flex gap-1 items-center text-xl font-bold justify-center text-azur-800'
-      />
-      <button>Admin</button>
-    </header>
+    <Header />
     <Sidebar />
 
     <slot />
