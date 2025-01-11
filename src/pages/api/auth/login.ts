@@ -11,7 +11,6 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
   if (!idToken) {
     return new Response('No token found', { status: 401 })
   }
-  console.log('idToken', idToken)
 
   /* Verify id token */
   try {
