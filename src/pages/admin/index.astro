@@ -5,10 +5,23 @@ import MainTitle from '../../components/MainTitle.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
 import Circle from '../../components/Circle.astro'
 import Main from '../../components/Main.astro'
+export const prerender = false
+/* Check current session */
+if (!Astro.cookies.has('__session')) {
+  return Astro.redirect('/signin')
+}
+
+const sessionCookie = Astro.cookies.get('__session')?.value
+
+if (!sessionCookie) {
+  return Astro.redirect('/signin')
+}
 ---
 
 <LayoutAdmin>
-  <Main>
+  <Main
+    class='relative bg-azur-200/20 p-4 md:p-6 flex flex-col gap-4 md:gap-6 pb-16 sm:pb-6'
+  >
     <MainTitle title='Resumen' />
     <section
       class='bg-azur-50 rounded-xl p-4 flex flex-wrap gap-4 lg:justify-around'
