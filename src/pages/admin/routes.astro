@@ -4,10 +4,23 @@ import MapAdd from '../../components/icons/MapAdd.astro'
 import Main from '../../components/Main.astro'
 import MainTitle from '../../components/MainTitle.astro'
 import InputFilter from '../../components/InputFilter.astro'
+export const prerender = false
+/* Check current session */
+if (!Astro.cookies.has('__session')) {
+  return Astro.redirect('/signin')
+}
+
+const sessionCookie = Astro.cookies.get('__session')?.value
+
+if (!sessionCookie) {
+  return Astro.redirect('/signin')
+}
 ---
 
 <LayoutAdmin>
-  <Main>
+  <Main
+    class='relative overflow-hidden bg-azur-200/20 p-4 md:p-6 flex flex-col gap-4 md:gap-6 pb-16 sm:pb-6'
+  >
     <MainTitle title='Lista de rutas' />
 
     <section class='flex justify-between gap-x-2 items-center'>
