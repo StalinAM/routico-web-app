@@ -1,5 +1,6 @@
 ---
 import { AddDriver } from '../../components/AddDriver'
+import DriverCard from '../../components/DriverCard.astro'
 import UserAdd from '../../components/icons/UserAdd.astro'
 import InputFilter from '../../components/InputFilter.astro'
 import Main from '../../components/Main.astro'
@@ -20,7 +21,7 @@ if (!sessionCookie) {
 
 <LayoutAdmin>
   <Main
-    class='relative overflow-hidden bg-azur-200/20 p-4 md:p-6 flex flex-col gap-4 md:gap-6 pb-16 sm:pb-6'
+    class='relative bg-azur-200/20 p-4 md:p-6 flex flex-col gap-4 md:gap-6 pb-16 sm:pb-6'
   >
     <MainTitle title='Lista de conductores' />
 
@@ -36,23 +37,10 @@ if (!sessionCookie) {
     </section>
 
     <section
-      class='flex flex-col w-full gap-y-4 bg-azur-50 rounded-xl border overflow-hidden'
+      class='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6'
     >
-      <div class='overflow-x-scroll'>
-        <table class='w-full'>
-          <thead>
-            <tr
-              class='grid grid-cols-[minmax(max-content,_1fr),minmax(60px,_1fr),minmax(60px,_1fr),minmax(60px,_1fr),minmax(80px,_110px)] gap-4 text-left text-sm [&_th]:font-medium text-gray-600 border-b py-3 px-4'
-            >
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Contraseña</th>
-              <th>Teléfono</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
+      <DriverCard />
+      <DriverCard />
     </section>
     <AddDriver client:load />
   </Main>
