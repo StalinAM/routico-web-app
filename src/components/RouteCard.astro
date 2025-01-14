@@ -1,0 +1,26 @@
+---
+import Arrow from "./icons/Arrow.astro";
+import PingMap from "./icons/PingMap.astro";
+---
+
+<article
+    class="flex justify-between items-center p-4 border-2 border-azur-600 rounded-lg bg-azur-200/20"
+>
+    <div class="w-full pr-4">
+        <header class="pb-2 border-b-2 flex intems center justify-between">
+            <div
+                class="flex gap-x-2 items-center text-xl font-bold"
+            >
+                <PingMap />
+                <h2>Ruta 1</h2>
+            </div>
+            <p class="text-sm text-green-500">Entregado</p>
+        </header>
+        <h3 class="pt-2 text-gray-600">Datos de entrega:</h3>
+        <p><strong>Cliente: </strong><span>Juan</span></p>
+        <p><strong>Direccion: </strong><span>Solanda s26-375</span></p>
+    </div>
+    <button class="rounded-full bg-azur-600 text-azur-50/80 p-2">
+        <Arrow />
+    </button>
+</article>
