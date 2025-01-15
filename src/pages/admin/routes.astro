@@ -4,6 +4,7 @@ import MapAdd from '../../components/icons/MapAdd.astro'
 import Main from '../../components/Main.astro'
 import MainTitle from '../../components/MainTitle.astro'
 import InputFilter from '../../components/InputFilter.astro'
+import RouteCard from '../../components/RouteCard.astro'
 export const prerender = false
 /* Check current session */
 if (!Astro.cookies.has('__session')) {
@@ -32,36 +33,11 @@ if (!sessionCookie) {
         Agregar
       </button>
     </section>
-    <section class='flex flex-col gap-y-4 bg-azur-50 rounded-xl border h-full'>
-      <table class='w-full'>
-        <thead class='border-b'>
-          <tr
-            class='overflow-auto grid gap-1 grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_110px_110px_110px] lg:grid-cols-[1fr_1fr_1fr_1fr_110px] text-left text-sm [&_th]:font-medium text-gray-600 border-b py-3 px-4'
-          >
-            <th>Nombre</th>
-            <th class='hidden md:block'>Teléfono</th>
-            <th class='hidden md:block'>Direccion</th>
-            <th>Contraseña</th>
-            <th>Editar</th>
-          </tr>
-        </thead>
-        <tbody class='grid p-3'>
-          <tr
-            class='overflow-auto grid gap-1 p-1 items-center grid-cols-[1fr_1fr_80px] md:grid-cols-[1fr_1fr_110px_110px_110px] lg:grid-cols-[1fr_1fr_1fr_1fr_110px] border-b border-gray-200'
-          >
-            <td>Carlos Guaman</td>
-            <td class='hidden md:block'>carlos@gmail.com</td>
-            <td class='hidden md:block'>*********</td>
-            <td>0978657839</td>
-            <td
-              ><button
-                class='w-full py-1 text-azur-50/90 bg-azur-600 rounded-xl hover:text-azur-600 hover:bg-azur-400'
-                >Activo</button
-              ></td
-            >
-          </tr>
-        </tbody>
-      </table>
+    <section class='grid justify-center md:justify-start grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6'>
+      <RouteCard/>
+      <RouteCard/>
+      <RouteCard/>
+      <RouteCard/>
     </section>
   </Main>
 </LayoutAdmin>
