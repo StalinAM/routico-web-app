@@ -1,16 +1,15 @@
 ---
 import Arrow from "./icons/Arrow.astro";
 import PingMap from "./icons/PingMap.astro";
+const { displayButton } = Astro.props;
 ---
 
 <article
-    class="flex justify-between items-center p-4 border-2 border-azur-600 rounded-lg bg-azur-200/20"
+    class="flex bg-azur-50 justify-between items-center p-4 border-2 border-azur-600 rounded-lg bg-azur-200/20"
 >
     <div class="w-full pr-4">
         <header class="pb-2 border-b-2 flex intems center justify-between">
-            <div
-                class="flex gap-x-2 items-center text-xl font-bold"
-            >
+            <div class="flex gap-x-2 items-center text-xl font-bold">
                 <PingMap />
                 <h2>Ruta 1</h2>
             </div>
@@ -20,7 +19,11 @@ import PingMap from "./icons/PingMap.astro";
         <p><strong>Cliente: </strong><span>Juan</span></p>
         <p><strong>Direccion: </strong><span>Solanda s26-375</span></p>
     </div>
-    <button class="rounded-full bg-azur-600 text-azur-50/80 p-2">
-        <Arrow />
-    </button>
+    {
+        displayButton && (
+            <button class="rounded-full bg-azur-600 text-azur-50/80 p-2 ">
+                <Arrow />
+            </button>
+        )
+    }
 </article>
