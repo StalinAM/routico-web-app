@@ -5,7 +5,10 @@ import MainTitle from '../../components/MainTitle.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
 import Circle from '../../components/Circle.astro'
 import Main from '../../components/Main.astro'
+import { getAuth } from 'firebase-admin/auth'
+import { app } from '../../lib/firebase/server'
 export const prerender = false
+const auth = getAuth(app)
 /* Check current session */
 if (!Astro.cookies.has('__session')) {
   return Astro.redirect('/signin')
@@ -15,6 +18,11 @@ const sessionCookie = Astro.cookies.get('__session')?.value
 
 if (!sessionCookie) {
   return Astro.redirect('/signin')
+}
+const decodedCookie = await auth.verifySessionCookie(sessionCookie)
+const user = await auth.getUser(decodedCookie.uid)
+if (user.email?.match(/@routico.com/)) {
+  return Astro.redirect('/drivers')
 }
 ---
 
