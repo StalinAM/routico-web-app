@@ -28,6 +28,11 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
   cookies.set('__session', sessionCookie, {
     path: '/'
   })
+  const decodedCookie = await auth.verifySessionCookie(sessionCookie)
+  const user = await auth.getUser(decodedCookie.uid)
 
+  if (user.email?.match(/@routico.com/)) {
+    return redirect('/drivers')
+  }
   return redirect('/admin')
 }
