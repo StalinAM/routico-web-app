@@ -19,6 +19,56 @@ export const Close = () => (
 )
 
 export function AddDriver() {
+  const [formData, setFormData] = useState({
+    name: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    password: ''
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prevData) => {
+      return {
+        ...prevData,
+        [name]: value
+      }
+    })
+  }
+
+  const generateEmail = (name, lastName) => {
+    return `${name.toLowerCase()}.${lastName.toLowerCase()}@routico.ec`
+  }
+  const generateSecurePassword = () => {
+    const charset =
+      'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~'
+    return Array.from({ length: 12 }, () =>
+      charset.charAt(Math.floor(Math.random() * charset.length))
+    ).join('')
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    // Generar email y contraseña
+    const email = generateEmail(formData.name, formData.lastName)
+    const password = generateSecurePassword()
+
+    // Crear el objeto completo antes de actualizar el estado
+    const completeData = {
+      ...formData,
+      email,
+      password
+    }
+
+    // Actualizar el estado con los datos generados
+    setFormData(completeData)
+
+    // Imprimir los datos completos
+    console.log('Driver added:', completeData)
+
+    // Aquí puedes manejar la lógica para enviar los datos a un servidor o base de datos
+  }
   return (
     <div
       id='modal-add-driver'
@@ -34,48 +84,48 @@ export function AddDriver() {
             <Close />
           </button>
         </div>
-        <form id='addDriverForm' className='w-full flex flex-col gap-y-4'>
+        <form
+          onSubmit={handleSubmit}
+          id='addDriverForm'
+          className='w-full flex flex-col gap-y-4'
+        >
           <div className='grid grid-cols-2 gap-4 px-6'>
             <div>
-              <label htmlFor='driverName' className='block text-gray-700'>
+              <label htmlFor='name' className='block text-gray-700'>
                 Nombre
                 <input
                   type='text'
-                  id='driverName'
+                  name='name'
+                  value={formData.nombre}
+                  onChange={handleChange}
                   className='block w-full border border-gray-200 rounded-xl py-2 px-4'
                   required
                 />
               </label>
             </div>
             <div>
-              <label htmlFor='driverName' className='text-gray-700'>
+              <label htmlFor='lastName' className='text-gray-700'>
                 Apellido
                 <input
                   type='text'
-                  id='driverName'
+                  name='lastName'
+                  value={formData.apellido}
+                  onChange={handleChange}
                   className='block w-full border border-gray-200 rounded-xl py-2 px-4'
                   required
                 />
               </label>
             </div>
           </div>
-          <label htmlFor='driverName' className='text-gray-700 px-6'>
-            Correo electrónico
-            <input
-              type='email'
-              id='driverName'
-              className='block w-full border border-gray-200 rounded-xl py-2 px-4 placeholder:font-extralight'
-              placeholder='nombre@ejemplo.com'
-              required
-            />
-          </label>
-          <label htmlFor='driverName' className='text-gray-700 px-6'>
+          <label htmlFor='phoneNumber' className='text-gray-700 px-6'>
             Teléfono
             <input
               type='text'
-              id='driverName'
+              name='phoneNumber'
               className='block w-full border border-gray-200 rounded-xl py-2 px-4 placeholder:font-extralight'
               placeholder='xx-xxxxxxxx'
+              value={formData.telefono}
+              onChange={handleChange}
               required
             />
           </label>
