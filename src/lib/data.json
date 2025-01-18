@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "Carlos",
+    "lastName": "Ramírez",
+    "phoneNumber": "555-123-4567",
+    "email": "carlos.ramirez@example.com",
+    "password": "P@ssw0rd123",
+    "uidDriver": "t2F9IlcuVJN4VezYkLH5R0fFP1s1",
+    "uidAdmin": "znB9qUb570SXmrkuOSVAPifL1KV2",
+    "routes": ["znB9qUb570SXmrkuOSVAPifL1KV", "znB9qUb570SXmrk"]
+  },
+  {
+    "id": 2,
+    "name": "Ana",
+    "lastName": "López",
+    "phoneNumber": "555-987-6543",
+    "email": "ana.lopez@example.com",
+    "password": "AnaL0p3z$",
+    "uidDriver": "znB9qUb570SXmrkuOSVAPifL1KV2",
+    "uidAdmin": "znB9qUb570SXmrkuOSVAPifL1KV2",
+    "routes": ["xpA3rTf980LXckovOSWM", "v8H7JpQoKXN5MehYhSH7"]
+  },
+  {
+    "id": 3,
+    "name": "Luis",
+    "lastName": "Gómez",
+    "phoneNumber": "555-567-2348",
+    "email": "luis.gomez@example.com",
+    "password": "LuisG0m3z#",
+    "uidDriver": "y4F3KlzoNTM7BerLkSH2V7jVP8t3",
+    "uidAdmin": "znB9qUb570SXmrkuOSVAPifL1KV2",
+    "routes": ["qlC7wRf970XPrkouOPVA", "y4F3KlzoNTM7BerLkSH2"]
+  },
+  {
+    "id": 4,
+    "name": "María",
+    "lastName": "Pérez",
+    "phoneNumber": "555-234-7689",
+    "email": "maria.perez@example.com",
+    "password": "Mari@Perez!",
+    "uidDriver": "u5T6NpKoJLM8CerXkPH6R5mVP9s4",
+    "uidAdmin": "znB9qUb570SXmrkuOSVAPifL1KV2",
+    "routes": ["ynE9vTf670LRtkovNSXB", "u5T6NpKoJLM8CerXkPH6"]
+  },
+  {
+    "id": 5,
+    "name": "Sofía",
+    "lastName": "Martínez",
+    "phoneNumber": "555-678-1234",
+    "email": "sofia.martinez@example.com",
+    "password": "S0fiaMart!nez",
+    "uidDriver": "k3J8NqPoKLN9FbrZkCH3V6nVP7u5",
+    "uidAdmin": "zmF8yTf680LKtrovOSUPPjfK6ZT9",
+    "routes": ["zmF8yTf680LKtrovOSUP", "k3J8NqPoKLN9FbrZkCH3"]
+  },
+  {
+    "id": 6,
+    "name": "Miguel",
+    "lastName": "Hernández",
+    "phoneNumber": "555-345-7890",
+    "email": "miguel.hernandez@example.com",
+    "password": "MiguelH3rn@ndez",
+    "uidDriver": "o7T5LqRoMLX9GerYkCH7V2oVP6x3",
+    "uidAdmin": "xpB3zTf960LKqkovOSVTPifN5XT8",
+    "routes": ["xpB3zTf960LKqkovOSVT", "o7T5LqRoMLX9GerYkCH7"]
+  },
+  {
+    "id": 7,
+    "name": "Daniela",
+    "lastName": "Torres",
+    "phoneNumber": "555-987-6540",
+    "email": "daniela.torres@example.com",
+    "password": "Dani3laTorr3s!",
+    "uidDriver": "p8H9MqQoNXM7NerZkPH3V4oVP2y5",
+    "uidAdmin": "yrA4xTf970LKtkovNSVTPifM6ZT7",
+    "routes": ["yrA4xTf970LKtkovNSVT", "p8H9MqQoNXM7NerZkPH3"]
+  },
+  {
+    "id": 8,
+    "name": "Carlos",
+    "lastName": "Morales",
+    "phoneNumber": "555-456-7893",
+    "email": "carlos.morales@example.com",
+    "password": "Carl0sMor@les",
+    "uidDriver": "q9K8MpNoOLN6BerYkCH2V8oVP3t4",
+    "uidAdmin": "znC9zRf970LKokovOSXTPifL4YT5",
+    "routes": ["znC9zRf970LKokovOSXT", "q9K8MpNoOLN6BerYkCH2"]
+  },
+  {
+    "id": 9,
+    "name": "Paula",
+    "lastName": "Ruiz",
+    "phoneNumber": "555-789-1234",
+    "email": "paula.ruiz@example.com",
+    "password": "PaulaRu1z$",
+    "uidDriver": "r5F8LqZoPLN7GerZkSH4V6mVP2u3",
+    "uidAdmin": "xrD7xRf860LKqkovNSUTPjfL5XT6",
+    "routes": ["xrD7xRf860LKqkovNSUT", "r5F8LqZoPLN7GerZkSH4"]
+  },
+  {
+    "id": 10,
+    "name": "Fernando",
+    "lastName": "Vargas",
+    "phoneNumber": "555-890-4567",
+    "email": "fernando.vargas@example.com",
+    "password": "Fernand0Varg@as",
+    "uidDriver": "s6H7MqToRLN9CerXkCH6V9oVP7t8",
+    "uidAdmin": "ypE9xTf750LKroovNSYTPjfN7ZT8",
+    "routes": ["ypE9xTf750LKroovNSYT", "s6H7MqToRLN9CerXkCH6"]
+  }
+]
