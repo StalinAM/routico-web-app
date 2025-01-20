@@ -1,12 +1,15 @@
 ---
 import { AddDriver } from '../../components/AddDriver'
-import DriverCard from '../../components/DriverCard.astro'
 import UserAdd from '../../components/icons/UserAdd.astro'
 import InputFilter from '../../components/InputFilter.astro'
+import { ListDrivers } from '../../components/ListDrivers'
 import Main from '../../components/Main.astro'
 import MainTitle from '../../components/MainTitle.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
 export const prerender = false
+import { getAuth } from 'firebase-admin/auth'
+import { app } from '../../lib/firebase/server'
+const auth = getAuth(app)
 /* Check current session */
 if (!Astro.cookies.has('__session')) {
   return Astro.redirect('/signin')
@@ -17,6 +20,7 @@ const sessionCookie = Astro.cookies.get('__session')?.value
 if (!sessionCookie) {
   return Astro.redirect('/signin')
 }
+const decodedCookie = await auth.verifySessionCookie(sessionCookie)
 ---
 
 <LayoutAdmin>
@@ -35,12 +39,8 @@ if (!sessionCookie) {
         Agregar
       </button>
     </section>
-
-    <section
-      class='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6'
-    >
-      <DriverCard />
-      <DriverCard />
+    <section>
+      <ListDrivers uid={decodedCookie.uid} client:load />
     </section>
     <AddDriver client:load />
   </Main>
