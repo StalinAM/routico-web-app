@@ -42,7 +42,7 @@ const decodedCookie = await auth.verifySessionCookie(sessionCookie)
     <section>
       <ListDrivers uid={decodedCookie.uid} client:load />
     </section>
-    <AddDriver client:load />
+    <AddDriver uid={decodedCookie.uid} client:load />
   </Main>
 </LayoutAdmin>
 <script>
