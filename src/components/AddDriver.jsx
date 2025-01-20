@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { addDriver } from '../utils/firebase/service'
+import { useAuthStore } from '../store/useAuthStore'
 
 export const Close = () => (
   <svg
@@ -18,7 +20,9 @@ export const Close = () => (
   </svg>
 )
 
-export function AddDriver() {
+export function AddDriver({ uid }) {
+  const { fetchdrivers } = useAuthStore()
+
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
@@ -48,7 +52,7 @@ export function AddDriver() {
     ).join('')
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     // Generar email y contraseña
     const email = generateEmail(formData.name, formData.lastName)
@@ -58,7 +62,8 @@ export function AddDriver() {
     const completeData = {
       ...formData,
       email,
-      password
+      password,
+      uidAdmin: uid
     }
 
     // Actualizar el estado con los datos generados
@@ -67,6 +72,8 @@ export function AddDriver() {
     // Imprimir los datos completos
     console.log('Driver added:', completeData)
 
+    await addDriver(completeData)
+    fetchdrivers(uid)
     // Aquí puedes manejar la lógica para enviar los datos a un servidor o base de datos
   }
   return (
