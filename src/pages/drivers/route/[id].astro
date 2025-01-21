@@ -1,0 +1,15 @@
+---
+import LayoutAdmin from "../../../layouts/LayoutAdmin.astro";
+import LayoutRoute from "../../../layouts/LayoutRoute.astro";
+import { routes } from "../../../lib/routes";
+
+const { id } = Astro.params;
+export const prerender = false;
+
+const data = routes.find((route) => route.name === id);
+---
+<LayoutRoute>
+  <div>
+    <h1>{data?.name}</h1>  
+  </div>
+</LayoutRoute>
