@@ -1,72 +1,47 @@
 ---
-import { getAuth } from 'firebase-admin/auth'
-import Header from '../../components/Header.astro'
-import Logo from '../../components/Logo.astro'
-import RouteCard from '../../components/RouteCard.astro'
-import Layout from '../../layouts/Layout.astro'
-import { app } from '../../lib/firebase/server'
-export const prerender = false
-const auth = getAuth(app)
+import { getAuth } from "firebase-admin/auth";
+import Header from "../../components/Header.astro";
+import Logo from "../../components/Logo.astro";
+import RouteCard from "../../components/RouteCard.astro";
+import Layout from "../../layouts/Layout.astro";
+import { app } from "../../lib/firebase/server";
+import { routes } from "../../lib/routes";
+import LayoutRoute from "../../layouts/LayoutRoute.astro";
+
+
+export const prerender = false;
+const auth = getAuth(app);
 /* Check current session */
-if (!Astro.cookies.has('__session')) {
-  return Astro.redirect('/signin')
+if (!Astro.cookies.has("__session")) {
+  return Astro.redirect("/signin");
 }
 
-const sessionCookie = Astro.cookies.get('__session')?.value
+const sessionCookie = Astro.cookies.get("__session")?.value;
 
 if (!sessionCookie) {
-  return Astro.redirect('/signin')
+  return Astro.redirect("/signin");
 }
-const decodedCookie = await auth.verifySessionCookie(sessionCookie)
-const user = await auth.getUser(decodedCookie.uid)
+const decodedCookie = await auth.verifySessionCookie(sessionCookie);
+const user = await auth.getUser(decodedCookie.uid);
 if (!user.email?.match(/@routico.com/)) {
-  return Astro.redirect('/admin')
+  return Astro.redirect("/admin");
 }
 ---
 
-<Layout>
-  <header
-    class='flex items-center justify-between py-3 px-6 [&_svg]:w-8 row-start-1 col-start-1 col-end-4 border-b border-azur-300'
-  >
-    <Logo
-      class='flex gap-1 items-center text-xl font-bold justify-center text-azur-800'
-    />
-    <form action='/api/auth/logout'>
-      <button
-        class='flex gap-1 items-center hover:bg-azur-800 hover:text-azur-50 rounded-xl px-4 py-2 [&_svg]:w-5'
-        type='submit'
-        ><svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='24'
-          height='24'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='currentColor'
-          stroke-width='2'
-          ><path stroke='none' d='M0 0h24v24H0z' fill='none'></path><path
-            d='M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2'
-          ></path><path d='M9 12h12l-3 -3'></path><path d='M18 15l3 -3'
-          ></path></svg
-        >Salir</button
-      >
-    </form>
-  </header>
-  <main
-    class='bg-azur-200/20 p-4 md:p-6 flex flex-col gap-4 md:gap-6 pb-16 sm:pb-6 min-h-[calc(100vh-65px)]'
-  >
-    <h1 class='text-2xl font-bold text-azur-800'>Lista de rutas</h1>
+<LayoutRoute>
+    <h1 class="text-2xl font-bold text-azur-800">Lista de rutas</h1>
     <section>
-      <ul class='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6'>
-        <li>
-          <RouteCard displayButton='true/' />
-        </li>
-        <li>
-          <RouteCard displayButton='true' />
-        </li>
-        <li>
-          <RouteCard displayButton='true' />
-        </li>
+      <ul class="grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6">
+        {
+          routes.map((route) => (
+            <li>
+              <a href={`/drivers/route/${route.name}`}>
+                <RouteCard displayButton="true" />
+              </a>
+            </li>
+          ))
+        }
+        
       </ul>
     </section>
-  </main>
-</Layout>
+</LayoutRoute>
