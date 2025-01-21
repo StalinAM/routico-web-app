@@ -1,7 +1,6 @@
 ---
 import { AddDriver } from '../../components/AddDriver'
 import UserAdd from '../../components/icons/UserAdd.astro'
-import InputFilter from '../../components/InputFilter.astro'
 import { ListDrivers } from '../../components/ListDrivers'
 import Main from '../../components/Main.astro'
 import MainTitle from '../../components/MainTitle.astro'
@@ -9,6 +8,7 @@ import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
 export const prerender = false
 import { getAuth } from 'firebase-admin/auth'
 import { app } from '../../lib/firebase/server'
+import { DriverSearch } from '../../components/DriverSearch'
 const auth = getAuth(app)
 /* Check current session */
 if (!Astro.cookies.has('__session')) {
@@ -30,7 +30,7 @@ const decodedCookie = await auth.verifySessionCookie(sessionCookie)
     <MainTitle title='Lista de conductores' />
 
     <section class='flex justify-between gap-x-2 items-center'>
-      <InputFilter />
+      <DriverSearch client:load />
       <button
         id='open-modal'
         class='flex items-center gap-x-1 bg-azur-600 text-azur-50/80 border rounded-xl py-2 px-4 hover:bg-azur-800 hover:text-azur-50'
