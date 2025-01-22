@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { addDriver } from '../utils/firebase/service'
+import { addDriver, registerDriver } from '../utils/firebase/service'
 import { useAuthStore } from '../store/useAuthStore'
 
 export const Close = () => (
@@ -21,6 +21,7 @@ export const Close = () => (
 )
 
 export function AddDriver({ uid }) {
+  const $modal = document.getElementById('modal-add-driver')
   const { fetchdrivers } = useAuthStore()
 
   const [formData, setFormData] = useState({
@@ -71,9 +72,10 @@ export function AddDriver({ uid }) {
 
     // Imprimir los datos completos
     console.log('Driver added:', completeData)
-
+    await registerDriver(completeData.name, email, password)
     await addDriver(completeData)
     fetchdrivers(uid)
+    $modal.classList.add('hidden')
     // Aquí puedes manejar la lógica para enviar los datos a un servidor o base de datos
   }
   return (
