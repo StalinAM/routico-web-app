@@ -1,27 +1,9 @@
 import { useState } from 'react'
 import { addDriver, registerDriver } from '../utils/firebase/service'
 import { useAuthStore } from '../store/useAuthStore'
+import { CloseButton } from './CloseButton'
 
-export const Close = () => (
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    width='22'
-    height='22'
-    viewBox='0 0 24 24'
-    fill='none'
-    stroke='currentColor'
-    strokeWidth='2'
-    strokeLinecap='round'
-    strokeLinejoin='round'
-  >
-    <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-    <path d='M18 6l-12 12'></path>
-    <path d='M6 6l12 12'></path>
-  </svg>
-)
-
-export function AddDriver({ uid }) {
-  const $modal = document.getElementById('modal-add-driver')
+export function AddDriver({ uid, isOpen, setIsOpen }) {
   const { fetchdrivers } = useAuthStore()
 
   const [formData, setFormData] = useState({
@@ -70,34 +52,22 @@ export function AddDriver({ uid }) {
     // Actualizar el estado con los datos generados
     setFormData(completeData)
 
-    // Imprimir los datos completos
     console.log('Driver added:', completeData)
     await registerDriver(completeData.name, email, password)
     await addDriver(completeData)
     fetchdrivers(uid)
-    $modal.classList.add('hidden')
-    // Aquí puedes manejar la lógica para enviar los datos a un servidor o base de datos
+    setIsOpen(false)
   }
+  if (!isOpen) return null
+
   return (
-    <div
-      id='modal-add-driver'
-      className='fixed hidden flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full'
-    >
+    <div className='fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full'>
       <div className='bg-azur-50 rounded-xl w-full max-w-sm flex flex-col gap-y-4'>
         <div className='border-b p-6 flex justify-between items-center'>
           <h3 className='text-center font-semibold text-xl'>Nuevo conductor</h3>
-          <button
-            id='close-modal'
-            className='cursor-pointer hover:bg-azur-800 rounded-md p-1 hover:text-azur-50'
-          >
-            <Close />
-          </button>
+          <CloseButton setIsOpen={setIsOpen} />
         </div>
-        <form
-          onSubmit={handleSubmit}
-          id='addDriverForm'
-          className='w-full flex flex-col gap-y-4'
-        >
+        <form onSubmit={handleSubmit} className='w-full flex flex-col gap-y-4'>
           <div className='grid grid-cols-2 gap-4 px-6'>
             <div>
               <label htmlFor='name' className='block text-gray-700'>
@@ -131,6 +101,7 @@ export function AddDriver({ uid }) {
             <input
               type='text'
               name='phoneNumber'
+              max={10}
               className='block w-full border border-gray-200 rounded-xl py-2 px-4 placeholder:font-extralight'
               placeholder='xx-xxxxxxxx'
               value={formData.telefono}
