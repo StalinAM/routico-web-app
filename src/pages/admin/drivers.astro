@@ -1,14 +1,13 @@
 ---
-import { AddDriver } from '../../components/AddDriver'
-import UserAdd from '../../components/icons/UserAdd.astro'
 import { ListDrivers } from '../../components/ListDrivers'
 import Main from '../../components/Main.astro'
 import MainTitle from '../../components/MainTitle.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
-export const prerender = false
 import { getAuth } from 'firebase-admin/auth'
 import { app } from '../../lib/firebase/server'
-import { DriverSearch } from '../../components/DriverSearch'
+import { Wrapper } from '../../components/Wrapper'
+
+export const prerender = false
 const auth = getAuth(app)
 /* Check current session */
 if (!Astro.cookies.has('__session')) {
@@ -28,32 +27,9 @@ const decodedCookie = await auth.verifySessionCookie(sessionCookie)
     class='relative bg-azur-200/20 p-4 md:p-6 flex flex-col gap-4 md:gap-6 pb-16 sm:pb-6'
   >
     <MainTitle title='Lista de conductores' />
-
-    <section class='flex justify-between gap-x-2 items-center'>
-      <DriverSearch client:load />
-      <button
-        id='open-modal'
-        class='flex items-center gap-x-1 bg-azur-600 text-azur-50/80 border rounded-xl py-2 px-4 hover:bg-azur-800 hover:text-azur-50'
-      >
-        <UserAdd />
-        Agregar
-      </button>
-    </section>
+    <Wrapper uid={decodedCookie.uid} client:load />
     <section>
       <ListDrivers uid={decodedCookie.uid} client:load />
     </section>
-    <AddDriver uid={decodedCookie.uid} client:load />
   </Main>
 </LayoutAdmin>
-<script>
-  const $openModal = document.getElementById('open-modal')
-  const $closeModal = document.getElementById('close-modal')
-  const $modal = document.getElementById('modal-add-driver')
-
-  $openModal?.addEventListener('click', () => {
-    $modal?.classList.remove('hidden')
-  })
-  $closeModal?.addEventListener('click', () => {
-    $modal?.classList.add('hidden')
-  })
-</script>
