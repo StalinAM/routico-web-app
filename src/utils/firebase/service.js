@@ -1,4 +1,12 @@
-import { query, collection, getDocs, where, addDoc } from 'firebase/firestore'
+import {
+  query,
+  collection,
+  getDocs,
+  where,
+  doc,
+  addDoc,
+  setDoc
+} from 'firebase/firestore'
 import { db, auth } from '../../lib/firebase/client'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 
@@ -50,6 +58,14 @@ export const registerDriver = async (name, email, password) => {
       password
     )
     await updateProfile(driverCredentials.user, { displayName: name })
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+export const updateDriver = async (docId, driver) => {
+  try {
+    await setDoc(doc(db, 'drivers', docId), driver)
   } catch (e) {
     console.log(e)
   }
