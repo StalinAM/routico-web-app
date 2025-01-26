@@ -3,8 +3,12 @@ import { fetchDrivers } from '../utils/firebase/service'
 
 export const useAuthStore = create((set, get) => ({
   drivers: [],
+  driver: {},
+  openModal: false,
   loading: true,
   searchTerm: '',
+  setOpenModal: (value) => set({ openModal: value }),
+  setDriver: (driver) => set({ driver }),
   setSearchTerm: (term) => set({ searchTerm: term }),
   getFilteredDrivers: () => {
     const { drivers, searchTerm } = get()
