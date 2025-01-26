@@ -1,10 +1,15 @@
-import { useState } from 'react'
-import { addDriver, registerDriver } from '../utils/firebase/service'
+import { useEffect, useState } from 'react'
+import {
+  addDriver,
+  registerDriver,
+  updateDriver
+} from '../utils/firebase/service'
 import { useAuthStore } from '../store/useAuthStore'
 import { CloseButton } from './CloseButton'
 
-export function AddDriver({ uid, isOpen, setIsOpen }) {
-  const { fetchdrivers } = useAuthStore()
+export function AddDriver({ uid }) {
+  const { fetchdrivers, setOpenModal, openModal, driver, setDriver } =
+    useAuthStore()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -13,6 +18,15 @@ export function AddDriver({ uid, isOpen, setIsOpen }) {
     email: '',
     password: ''
   })
+  useEffect(() => {
+    if (driver.email) {
+      setFormData({
+        name: driver.name,
+        lastName: driver.lastName,
+        phoneNumber: driver.phoneNumber
+      })
+    }
+  }, [driver])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -38,34 +52,56 @@ export function AddDriver({ uid, isOpen, setIsOpen }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     // Generar email y contraseña
-    const email = generateEmail(formData.name, formData.lastName)
-    const password = generateSecurePassword()
+    if (!driver.email) {
+      const email = generateEmail(formData.name, formData.lastName)
+      const password = generateSecurePassword()
+      const completeData = {
+        ...formData,
+        email,
+        password,
+        uidAdmin: uid
+      }
+      await registerDriver(completeData.name, email, password)
+      await addDriver(completeData)
+      setDriver({})
+    } else {
+      // Crear el objeto completo antes de actualizar el estado
+      const completeData = {
+        ...driver,
+        name: formData.name,
+        lastName: formData.lastName,
+        phoneNumber: formData.phoneNumber,
+        uidAdmin: uid
+      }
 
-    // Crear el objeto completo antes de actualizar el estado
-    const completeData = {
-      ...formData,
-      email,
-      password,
-      uidAdmin: uid
+      // Actualizar el estado con los datos generados
+      await updateDriver(driver.docId, completeData)
+      setDriver({})
     }
-
-    // Actualizar el estado con los datos generados
-    setFormData(completeData)
-
-    console.log('Driver added:', completeData)
-    await registerDriver(completeData.name, email, password)
-    await addDriver(completeData)
+    setFormData({
+      name: '',
+      lastName: '',
+      phoneNumber: '',
+      email: '',
+      password: ''
+    })
     fetchdrivers(uid)
-    setIsOpen(false)
+    setOpenModal(false)
   }
-  if (!isOpen) return null
+  if (!openModal) return null
 
   return (
     <div className='fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full'>
       <div className='bg-azur-50 rounded-xl w-full max-w-sm flex flex-col gap-y-4'>
         <div className='border-b p-6 flex justify-between items-center'>
-          <h3 className='text-center font-semibold text-xl'>Nuevo conductor</h3>
-          <CloseButton setIsOpen={setIsOpen} />
+          <h3 className='text-center font-semibold text-xl'>
+            {driver?.email ? 'Actualizar conductor' : 'Nuevo conductor'}
+          </h3>
+          <CloseButton
+            setOpenModal={setOpenModal}
+            setDriver={setDriver}
+            setFormData={setFormData}
+          />
         </div>
         <form onSubmit={handleSubmit} className='w-full flex flex-col gap-y-4'>
           <div className='grid grid-cols-2 gap-4 px-6'>
@@ -75,7 +111,7 @@ export function AddDriver({ uid, isOpen, setIsOpen }) {
                 <input
                   type='text'
                   name='name'
-                  value={formData.nombre}
+                  value={formData.name}
                   onChange={handleChange}
                   className='block w-full border border-gray-200 rounded-xl py-2 px-4'
                   required
@@ -88,7 +124,7 @@ export function AddDriver({ uid, isOpen, setIsOpen }) {
                 <input
                   type='text'
                   name='lastName'
-                  value={formData.apellido}
+                  value={formData.lastName}
                   onChange={handleChange}
                   className='block w-full border border-gray-200 rounded-xl py-2 px-4'
                   required
@@ -104,7 +140,7 @@ export function AddDriver({ uid, isOpen, setIsOpen }) {
               max={10}
               className='block w-full border border-gray-200 rounded-xl py-2 px-4 placeholder:font-extralight'
               placeholder='xx-xxxxxxxx'
-              value={formData.telefono}
+              value={formData.phoneNumber}
               onChange={handleChange}
               required
             />
