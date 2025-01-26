@@ -1,7 +1,17 @@
-export function CloseButton({ setIsOpen }) {
+export function CloseButton({ setOpenModal, setDriver, setFormData }) {
   return (
     <button
-      onClick={() => setIsOpen(false)}
+      onClick={() => {
+        setOpenModal(false)
+        setDriver({})
+        setFormData({
+          name: '',
+          lastName: '',
+          phoneNumber: '',
+          email: '',
+          password: ''
+        })
+      }}
       className='cursor-pointer hover:bg-azur-800 rounded-md p-1 hover:text-azur-50'
     >
       <svg
