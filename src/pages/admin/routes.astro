@@ -24,13 +24,17 @@ const decodedCookie = await auth.verifySessionCookie(sessionCookie)
 
 <LayoutAdmin>
   <Main
-    class='relative overflow-hidden bg-azur-200/20 p-4 md:p-6 flex flex-col gap-4 md:gap-6 pb-16 sm:pb-6'
+    class='relative overflow-y-scroll bg-azur-200/20 p-4 md:p-6 flex flex-col gap-4 md:gap-6 pb-16 sm:pb-6'
   >
     <MainTitle title='Lista de rutas' />
 
     <WrapperRoutes uid={decodedCookie.uid} client:load />
     <section>
-      <ListRoutes uid={decodedCookie.uid} client:load />
+      <ul
+        class='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-2 justify-center'
+      >
+        <ListRoutes simple={true} uid={decodedCookie.uid} client:load />
+      </ul>
     </section>
   </Main>
 </LayoutAdmin>
