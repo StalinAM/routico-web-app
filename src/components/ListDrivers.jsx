@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
+import { AddRouteI } from './icons/Icons'
 
 export function ListDrivers({ uid }) {
-  const { drivers, loading, fetchdrivers, getFilteredDrivers } = useAuthStore()
+  const { setOpenModal, setDriver, loading, fetchdrivers, getFilteredDrivers } =
+    useAuthStore()
   const [visiblePasswords, setVisiblePasswords] = useState({})
   const [driversLoaded, setDriversLoaded] = useState(false)
 
@@ -26,8 +28,13 @@ export function ListDrivers({ uid }) {
       [docId]: !prev[docId] // Cambia el estado de visibilidad para este `docId`
     }))
   }
+  const openDriverModal = (driver) => {
+    setDriver(driver)
+    setOpenModal(true)
+  }
+
   return (
-    <ul className='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6 justify-center md:justify-start'>
+    <ul className='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6 justify-center'>
       {filteredDrivers.map((driver) => (
         <li key={driver.docId}>
           <article className='bg-azur-50 rounded-xl p-4 flex flex-col gap-2 border-2 border-azur-800'>
@@ -54,9 +61,33 @@ export function ListDrivers({ uid }) {
                   <span>{driver.phoneNumber}</span>
                 </p>
               </div>
-              <span className='bg-azur-800 text-green-400 rounded-xl px-3 py-1'>
-                Activo
-              </span>
+              <div className='flex items-center gap-2'>
+                <button className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1'>
+                  <AddRouteI />
+                </button>
+                <button
+                  onClick={() => openDriverModal(driver)}
+                  className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1'
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='24'
+                    height='24'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    stroke-width='2'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    class='icon icon-tabler icons-tabler-outline icon-tabler-user-edit'
+                  >
+                    <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+                    <path d='M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0' />
+                    <path d='M6 21v-2a4 4 0 0 1 4 -4h3.5' />
+                    <path d='M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z' />
+                  </svg>
+                </button>
+              </div>
             </header>
             <h3 className='font-bold'>Credenciales:</h3>
             <p>
