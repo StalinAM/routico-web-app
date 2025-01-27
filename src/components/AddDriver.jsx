@@ -98,8 +98,9 @@ export function AddDriver({ uid }) {
             {driver?.email ? 'Actualizar conductor' : 'Nuevo conductor'}
           </h3>
           <CloseButton
+            data={driver}
             setOpenModal={setOpenModal}
-            setDriver={setDriver}
+            setObject={setDriver}
             setFormData={setFormData}
           />
         </div>
