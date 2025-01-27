@@ -3,8 +3,12 @@ import { fetchRoutes } from '../utils/firebase/service'
 
 export const useRouteStore = create((set, get) => ({
   routes: [],
+  route: {},
+  openModal: false,
   loading: true,
   searchTerm: '',
+  setOpenModal: (value) => set({ openModal: value }),
+  setRoute: (route) => set({ route }),
   setSearchTerm: (term) => set({ searchTerm: term }),
   getFilteredRoutes: () => {
     const { routes, searchTerm } = get()
@@ -17,7 +21,7 @@ export const useRouteStore = create((set, get) => ({
   fetchRoutes: async (uid) => {
     set({ loading: true, error: null })
     try {
-      const routesList = await fetchDrivers(uid)
+      const routesList = await fetchRoutes(uid)
       set({ routes: routesList, loading: false })
     } catch (error) {
       set({ loading: false, error: error.message })
