@@ -3,6 +3,7 @@ import { AddDriver } from './AddDriver'
 import { Search } from './Search'
 import { useAuthStore } from '../store/useAuthStore'
 import { AddDriverI } from './icons/Icons'
+import { AddRoutesDriver } from './AddRoutesDriver'
 
 export function Wrapper({ uid }) {
   const { setOpenModal, searchTerm, setSearchTerm } = useAuthStore()
@@ -17,6 +18,7 @@ export function Wrapper({ uid }) {
         Agregar
       </button>
       <AddDriver uid={uid} />
+      <AddRoutesDriver uid={uid} />
     </section>
   )
 }
