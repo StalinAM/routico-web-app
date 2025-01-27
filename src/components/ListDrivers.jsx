@@ -3,8 +3,15 @@ import { useAuthStore } from '../store/useAuthStore'
 import { AddRouteI } from './icons/Icons'
 
 export function ListDrivers({ uid }) {
-  const { setOpenModal, setDriver, loading, fetchdrivers, getFilteredDrivers } =
-    useAuthStore()
+  const {
+    drivers,
+    setOpenModal,
+    setOpenModalRoutes,
+    setDriver,
+    loading,
+    fetchdrivers,
+    getFilteredDrivers
+  } = useAuthStore()
   const [visiblePasswords, setVisiblePasswords] = useState({})
   const [driversLoaded, setDriversLoaded] = useState(false)
 
@@ -12,6 +19,7 @@ export function ListDrivers({ uid }) {
     if (!driversLoaded) {
       fetchdrivers(uid).then(() => setDriversLoaded(true))
     }
+    console.log(drivers)
   }, [uid, fetchdrivers, driversLoaded])
 
   const filteredDrivers = getFilteredDrivers()
@@ -31,6 +39,11 @@ export function ListDrivers({ uid }) {
   const openDriverModal = (driver) => {
     setDriver(driver)
     setOpenModal(true)
+  }
+
+  const openRouteModal = (driver) => {
+    setDriver(driver)
+    setOpenModalRoutes(true)
   }
 
   return (
@@ -62,7 +75,10 @@ export function ListDrivers({ uid }) {
                 </p>
               </div>
               <div className='flex items-center gap-2'>
-                <button className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1'>
+                <button
+                  onClick={() => openRouteModal(driver)}
+                  className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1'
+                >
                   <AddRouteI />
                 </button>
                 <button
@@ -76,10 +92,9 @@ export function ListDrivers({ uid }) {
                     viewBox='0 0 24 24'
                     fill='none'
                     stroke='currentColor'
-                    stroke-width='2'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
-                    class='icon icon-tabler icons-tabler-outline icon-tabler-user-edit'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
                   >
                     <path stroke='none' d='M0 0h24v24H0z' fill='none' />
                     <path d='M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0' />
