@@ -14,7 +14,7 @@ export const useRouteStore = create((set, get) => ({
     const { routes, searchTerm } = get()
     if (!searchTerm) return routes
     return routes.filter((route) => {
-      return route.name.toLowerCase().includes(searchTerm.toLowerCase())
+      return route.routeName.toLowerCase().includes(searchTerm.toLowerCase())
     })
   },
   error: null,
