@@ -70,3 +70,10 @@ export const updateDriver = async (docId, driver) => {
     console.log(e)
   }
 }
+export const updateRoute = async (docId, route) => {
+  try {
+    await setDoc(doc(db, 'drivers', docId), route)
+  } catch (e) {
+    console.log(e)
+  }
+}
