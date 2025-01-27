@@ -1,16 +1,14 @@
-export function CloseButton({ setOpenModal, setDriver, setFormData }) {
+export function CloseButton({ setOpenModal, data, setObject, setFormData }) {
   return (
     <button
       onClick={() => {
         setOpenModal(false)
-        setDriver({})
-        setFormData({
-          name: '',
-          lastName: '',
-          phoneNumber: '',
-          email: '',
-          password: ''
-        })
+        setObject({})
+        setFormData(
+          Object.fromEntries(
+            Object.keys(data).map((key) => [key, '']) // Cambia cada valor a una cadena vacía
+          )
+        )
       }}
       className='cursor-pointer hover:bg-azur-800 rounded-md p-1 hover:text-azur-50'
     >
