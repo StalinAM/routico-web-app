@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
 import { AddRouteI } from './icons/Icons'
+import { useRouteStore } from '../store/useRouteStore'
 
 export function ListDrivers({ uid }) {
   const {
@@ -12,6 +13,7 @@ export function ListDrivers({ uid }) {
     fetchdrivers,
     getFilteredDrivers
   } = useAuthStore()
+  const { routes } = useRouteStore()
   const [visiblePasswords, setVisiblePasswords] = useState({})
   const [driversLoaded, setDriversLoaded] = useState(false)
 
@@ -155,9 +157,18 @@ export function ListDrivers({ uid }) {
             <div className='border-t-2 pt-2'>
               <h3 className='font-bold'>Rutas:</h3>
               <ul className='route-list'>
-                <li>Central Park to Downtown</li>
-                <li>Main Street to Airport</li>
-                <li>Harbor Road to City Center</li>
+                {driver.routes.map((routeId, index) => {
+                  const matchedRoute = routes.find(
+                    (route) => route.docId === routeId
+                  )
+                  return (
+                    <li key={index}>
+                      {matchedRoute
+                        ? matchedRoute.routeName
+                        : 'Ruta no encontrada'}
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           </article>
