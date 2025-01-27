@@ -30,11 +30,7 @@ const decodedCookie = await auth.verifySessionCookie(sessionCookie)
 
     <WrapperRoutes uid={decodedCookie.uid} client:load />
     <section>
-      <ul
-        class='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-2 justify-center'
-      >
-        <ListRoutes simple={true} uid={decodedCookie.uid} client:load />
-      </ul>
+      <ListRoutes simple={true} uid={decodedCookie.uid} client:load />
     </section>
   </Main>
 </LayoutAdmin>
