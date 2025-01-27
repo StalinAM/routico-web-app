@@ -44,22 +44,11 @@ if (user.email?.match(/@routico.ec/)) {
     </section>
     <section class='rounded-xl w-full h-auto lg:row-start-2 bg-azur-50'>
     </section>
-    <section class='overflow-hidden'>
+    <section class='overflow-hidden bg-azur-50 p-4 rounded-xl'>
       <ul
         class='overflow-y-auto max-h-full h-auto grid grid-cols-[repeat(auto-fit,minmax(250px,300px))] gap-2 justify-center'
       >
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
-        <ListRoutes simple={false} uid={decodedCookie.uid} />
+        <ListRoutes simple={false} uid={decodedCookie.uid} client:load />
       </ul>
     </section>
   </Main>
