@@ -2,6 +2,7 @@ import {
   query,
   collection,
   getDocs,
+  getDoc,
   where,
   doc,
   addDoc,
@@ -58,6 +59,7 @@ export const registerDriver = async (name, email, password) => {
       password
     )
     await updateProfile(driverCredentials.user, { displayName: name })
+    return driverCredentials.user.uid
   } catch (e) {
     console.log(e)
   }
@@ -72,8 +74,41 @@ export const updateDriver = async (docId, driver) => {
 }
 export const updateRoute = async (docId, route) => {
   try {
-    await setDoc(doc(db, 'drivers', docId), route)
+    await setDoc(doc(db, 'routes', docId), route)
   } catch (e) {
     console.log(e)
+  }
+}
+
+export const getDriverRoutes = async (uidDriver) => {
+  try {
+    // 1. Obtener el documento del conductor desde 'drivers'
+    const q = query(
+      collection(db, 'drivers'),
+      where('uidDriver', '==', uidDriver)
+    )
+    const querySnapshot = await getDocs(q)
+
+    const driverData = querySnapshot.docs[0].data()
+
+    // 2. Verificar si tiene rutas asignadas
+    if (!driverData.routes || driverData.routes.length === 0) {
+      console.log('No hay rutas asignadas')
+      return []
+    }
+
+    // 3. Obtener las rutas desde la colección 'routes'
+    const routesPromises = driverData.routes.map(async (routeId) => {
+      const routeRef = doc(db, 'routes', routeId)
+      const routeDoc = await getDoc(routeRef)
+      return routeDoc.exists() ? { id: routeDoc.id, ...routeDoc.data() } : null
+    })
+
+    const routes = (await Promise.all(routesPromises)).filter(Boolean)
+
+    return routes
+  } catch (e) {
+    console.error('Error obteniendo rutas:', e)
+    return []
   }
 }
