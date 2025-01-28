@@ -28,7 +28,7 @@ const decodedCookie = await auth.verifySessionCookie(sessionCookie)
   >
     <MainTitle title='Lista de rutas' />
 
-    <WrapperRoutes uid={decodedCookie.uid} client:load />
+    <WrapperRoutes uid={decodedCookie.uid} client:only />
     <section>
       <ListRoutes simple={true} uid={decodedCookie.uid} client:load />
     </section>
