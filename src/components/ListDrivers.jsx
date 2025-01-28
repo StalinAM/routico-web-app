@@ -157,7 +157,7 @@ export function ListDrivers({ uid }) {
             <div className='border-t-2 pt-2'>
               <h3 className='font-bold'>Rutas:</h3>
               <ul className='route-list'>
-                {driver.routes.map((routeId, index) => {
+                {driver?.routes?.map((routeId, index) => {
                   const matchedRoute = routes.find(
                     (route) => route.docId === routeId
                   )
