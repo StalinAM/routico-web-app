@@ -55,13 +55,14 @@ export function AddDriver({ uid }) {
     if (!driver.email) {
       const email = generateEmail(formData.name, formData.lastName)
       const password = generateSecurePassword()
+      const uidDriver = await registerDriver(formData.name, email, password)
       const completeData = {
         ...formData,
         email,
         password,
-        uidAdmin: uid
+        uidAdmin: uid,
+        uidDriver: uidDriver
       }
-      await registerDriver(completeData.name, email, password)
       await addDriver(completeData)
       setDriver({})
     } else {
