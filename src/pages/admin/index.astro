@@ -8,7 +8,7 @@ import Main from '../../components/Main.astro'
 import { getAuth } from 'firebase-admin/auth'
 import { app } from '../../lib/firebase/server'
 import { ListRoutes } from '../../components/ListRoutes'
-import { fade } from 'astro:transitions'
+import { MarkersMap } from '../../components/MarkersMap'
 export const prerender = false
 const auth = getAuth(app)
 /* Check current session */
@@ -42,7 +42,8 @@ if (user.email?.match(/@routico.ec/)) {
         <MapPoints class='w-8 h-8 text-azur-600' />
       </Circle>
     </section>
-    <section class='rounded-xl w-full h-auto lg:row-start-2 bg-azur-50'>
+    <section class='rounded-xl overflow-hidden'>
+      <MarkersMap client:only />
     </section>
     <section class='overflow-hidden bg-azur-50 p-4 rounded-xl'>
       <ul
