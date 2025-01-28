@@ -85,7 +85,7 @@ export function AddRoutesDriver({ uid }) {
           className='w-full px-6 flex flex-col gap-y-4'
         >
           <h4>Lista de Rutas</h4>
-          <div className=' flex gap-6'>
+          <div className=' flex flex-wrap gap-x-4 gap-y-3'>
             {loading ? (
               <p>Cargando rutas...</p>
             ) : filteredRoutes.length === 0 ? (
