@@ -1,14 +1,11 @@
 ---
-import MapPoints from '../../components/icons/MapPoints.astro'
-import UserGroup from '../../components/icons/UserGroup.astro'
-import MainTitle from '../../components/MainTitle.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
-import Circle from '../../components/Circle.astro'
 import Main from '../../components/Main.astro'
 import { getAuth } from 'firebase-admin/auth'
 import { app } from '../../lib/firebase/server'
 import { ListRoutes } from '../../components/ListRoutes'
 import { MarkersMap } from '../../components/MarkersMap'
+import { Count } from '../../components/Count'
 export const prerender = false
 const auth = getAuth(app)
 /* Check current session */
@@ -35,12 +32,8 @@ if (user.email?.match(/@routico.ec/)) {
     <section
       class='bg-azur-50 rounded-xl lg:col-start-1 lg:col-end-3 p-4 flex flex-wrap gap-4 lg:justify-around'
     >
-      <Circle title='Conductores' amount='10'>
-        <UserGroup class='w-8 h-8 text-azur-600' />
-      </Circle>
-      <Circle title='Rutas' amount='5'>
-        <MapPoints class='w-8 h-8 text-azur-600' />
-      </Circle>
+      <Count uid={decodedCookie.uid} data='conductores' client:load />
+      <Count uid={decodedCookie.uid} data='rutas' client:load />
     </section>
     <section class='rounded-xl overflow-hidden'>
       <MarkersMap client:only />
