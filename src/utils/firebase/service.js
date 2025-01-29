@@ -6,7 +6,8 @@ import {
   where,
   doc,
   addDoc,
-  setDoc
+  setDoc,
+  updateDoc
 } from 'firebase/firestore'
 import { db, auth } from '../../lib/firebase/client'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
@@ -45,7 +46,8 @@ export const addDriver = async (driver) => {
 export const addRoute = async (route) => {
   try {
     const routeRef = collection(db, 'routes')
-    await addDoc(routeRef, route)
+    const doc = await addDoc(routeRef, route)
+    await updateDoc(doc, { docId: doc.id })
   } catch (e) {
     console.log(e)
   }
