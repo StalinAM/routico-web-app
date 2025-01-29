@@ -55,7 +55,7 @@ export function ListDrivers({ uid }) {
           <article className='bg-azur-50 rounded-xl p-4 flex flex-col gap-2 border-2 border-azur-800'>
             <header className='py-2 border-b-2 flex justify-between items-center'>
               <div className=''>
-                <h2 className='font-bold text-2xl capitalize'>
+                <h2 className='font-bold text-xl capitalize'>
                   {driver.name} {driver.lastName}
                 </h2>
                 <p className='flex gap-1 items-center'>

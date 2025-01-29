@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { getDriverRoutes } from '../utils/firebase/service'
 
 const Map = ({ uid, id }) => {
-  const { routes, setRoutes } = useRouteStore()
+  const { setRoute, setRoutes, route } = useRouteStore()
   const [origin, setOrigin] = useState(null) // Estado para la ubicación actual
   const [waypoints, setWaypoints] = useState([])
   const [destination, setDestination] = useState(null)
@@ -34,6 +34,9 @@ const Map = ({ uid, id }) => {
         setRoutes(fetchedRoutes)
         const selectedRoute = fetchedRoutes.find((route) => route.docId === id)
         if (selectedRoute) {
+          setRoute(selectedRoute)
+          console.log(route)
+
           setDestination(selectedRoute.address)
           setWaypoints(
             Object.values(selectedRoute.waypoints)
@@ -61,9 +64,9 @@ const Map = ({ uid, id }) => {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {origin && waypoints.length > 0 && (
+      {/* {origin && waypoints.length > 0 && (
         <RoutineMachine waypoints={[origin, ...waypoints, destination]} />
-      )}
+      )} */}
     </MapContainer>
   )
 }
