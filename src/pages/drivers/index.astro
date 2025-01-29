@@ -1,8 +1,6 @@
 ---
 import { getAuth } from 'firebase-admin/auth'
-import RouteCard from '../../components/RouteCard.astro'
 import { app } from '../../lib/firebase/server'
-import { routes } from '../../lib/routes'
 import LayoutRoute from '../../layouts/LayoutRoute.astro'
 import { ListRoutesDriver } from '../../components/ListRoutesDriver'
 
@@ -23,7 +21,7 @@ const user = await auth.getUser(decodedCookie.uid)
 if (!user.email?.match(/@routico.ec/)) {
   return Astro.redirect('/admin')
 }
-console.log(user.uid)
+console.log(decodedCookie.uid)
 ---
 
 <LayoutRoute>
