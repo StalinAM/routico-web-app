@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
 import { Marker, Popup, useMapEvents } from 'react-leaflet'
-import { useRouteStore } from '../store/useRouteStore'
 
-export function LocateUser({ setCoordinates }) {
+export function LocateUser({ setCoordinates, address }) {
   const [currentPosition, setCurrentPosition] = useState(null) // Ubicación inicial
   const [selectedPosition, setSelectedPosition] = useState(null) // Ubicación seleccionada
   const [hasMoved, setHasMoved] = useState(false)
-  const { route } = useRouteStore()
 
   // Usar la geolocalización del navegador para obtener la posición inicial del usuario
   useEffect(() => {
-    if (route?.address) {
+    if (address) {
       // Si existe una dirección en la ruta, la usamos como posición inicial
-      setCurrentPosition(route.address)
+      setCurrentPosition(address)
     } else if (!currentPosition && !hasMoved && 'geolocation' in navigator) {
       // Solo obtenemos la ubicación si currentPosition es null y el usuario no ha movido el mapa
       navigator.geolocation.getCurrentPosition(
@@ -26,12 +24,11 @@ export function LocateUser({ setCoordinates }) {
         }
       )
     }
-  }, [currentPosition, hasMoved, setCoordinates, route?.address])
+  }, [currentPosition, hasMoved, setCoordinates, address])
   // Manejo de eventos del mapa
   const map = useMapEvents({
     click: (e) => {
       setSelectedPosition(e.latlng) // Actualiza la ubicación seleccionada al hacer clic
-      console.log('e.latlng', e.latlng.lat, e.latlng.lng)
       setCoordinates([e.latlng.lat, e.latlng.lng]) // Actualiza las coordenadas en el componente padre
 
       setHasMoved(true) // Indica que el usuario movió el mapa
@@ -69,8 +66,8 @@ export function LocateUser({ setCoordinates }) {
         <Marker position={currentPosition}>
           <Popup>
             Estás aquí: <br />
-            Latitud: {currentPosition[0].toFixed(4)} <br />
-            Longitud: {currentPosition[1].toFixed(4)}
+            Latitud: {currentPosition[0]} <br />
+            Longitud: {currentPosition[1]}
           </Popup>
         </Marker>
       )}
@@ -80,8 +77,8 @@ export function LocateUser({ setCoordinates }) {
         <Marker position={selectedPosition}>
           <Popup>
             Ubicación seleccionada: <br />
-            Latitud: {selectedPosition.lat?.toFixed(4)} <br />
-            Longitud: {selectedPosition.lng?.toFixed(4)}
+            Latitud: {selectedPosition.lat} <br />
+            Longitud: {selectedPosition.lng}
           </Popup>
         </Marker>
       )}
