@@ -1,15 +1,32 @@
 ---
-import LayoutAdmin from "../../../layouts/LayoutAdmin.astro";
-import LayoutRoute from "../../../layouts/LayoutRoute.astro";
-import { routes } from "../../../lib/routes";
+import LayoutRoute from '../../../layouts/LayoutRoute.astro'
+import { getAuth } from 'firebase-admin/auth'
+import { app } from '../../../lib/firebase/server'
+import { getDriverRoutes } from '../../../utils/firebase/service'
+import Map from '../../../components/Map'
 
-const { id } = Astro.params;
-export const prerender = false;
+export const prerender = false
 
-const data = routes.find((route) => route.name === id);
+// Inicializar Firebase Auth
+const auth = getAuth(app)
+
+// Verificar la sesión del usuario
+if (!Astro.cookies.has('__session')) {
+  return Astro.redirect('/signin')
+}
+
+const sessionCookie = Astro.cookies.get('__session')?.value
+if (!sessionCookie) {
+  return Astro.redirect('/signin')
+}
+
+const decodedCookie = await auth.verifySessionCookie(sessionCookie)
+const { id } = Astro.params
 ---
+
 <LayoutRoute>
-  <div>
-    <h1>{data?.name}</h1>  
-  </div>
+  <h1></h1>
+  <section class='rounded-xl overflow-hidden min-h-dvh'>
+    <Map uid={decodedCookie.uid} id={id} client:only />
+  </section>
 </LayoutRoute>
