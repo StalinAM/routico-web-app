@@ -96,7 +96,7 @@ export function AddRoute({ uid }) {
   if (!openModal) return null
   return (
     <div className='fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full'>
-      <div className='bg-azur-50 rounded-xl w-full max-w-xs md:max-w-sm lg:max-w-md flex flex-col gap-y-4'>
+      <div className='bg-azur-50 overflow-y-scroll rounded-xl w-full max-w-xs md:max-w-sm lg:max-w-md max-h-[80%] flex flex-col gap-y-4'>
         <div className='border-b p-4 md:p-6 flex justify-between items-center'>
           <h3 className='text-center font-semibold text-xl'>
             {route?.name ? 'Actualizar ruta' : 'Nueva ruta'}
