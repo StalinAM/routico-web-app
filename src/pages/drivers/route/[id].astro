@@ -5,6 +5,7 @@ import { app } from '../../../lib/firebase/server'
 import { getDriverRoutes } from '../../../utils/firebase/service'
 import Map from '../../../components/Map'
 import { HeaderDriver } from '../../../components/HeaderDriver'
+import { DetailsDelivery } from '../../../components/DetailsDelivery'
 
 export const prerender = false
 
@@ -27,7 +28,10 @@ const { id } = Astro.params
 
 <LayoutRoute>
   <HeaderDriver client:load />
-  <section class='rounded-xl overflow-hidden min-h-dvh'>
+  <section class='rounded-xl overflow-hidden min-h-[50%]'>
     <Map uid={decodedCookie.uid} id={id} client:only />
+  </section>
+  <section>
+    <DetailsDelivery client:load />
   </section>
 </LayoutRoute>
