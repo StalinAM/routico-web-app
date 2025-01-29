@@ -4,6 +4,7 @@ import { addRoute, updateRoute } from '../utils/firebase/service'
 import { useRouteStore } from '../store/useRouteStore'
 import { MarkersMap } from './MarkersMap'
 import { routes } from '../lib/routes'
+import { MarkerMapLimit } from './MarkersMapLimit'
 
 export function AddRoute({ uid }) {
   const { setOpenModal, setRoute, route, openModal, fetchRoutes } =
@@ -12,7 +13,8 @@ export function AddRoute({ uid }) {
     routeName: '',
     name: '',
     phoneNumber: '',
-    address: []
+    address: [],
+    waypoints: {}
   })
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export function AddRoute({ uid }) {
         routeName: route.routeName,
         name: route.name,
         phoneNumber: route.phoneNumber,
-        address: route.address || []
+        address: route.address || {}
       })
     }
   }, [route])
@@ -48,6 +50,12 @@ export function AddRoute({ uid }) {
         'Las coordenadas deben ser un arreglo con latitud y longitud.'
       )
     }
+  }
+  const handleSetWaypoints = (waypoints) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      waypoints // Guardamos las coordenadas en el estado principal
+    }))
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -158,6 +166,14 @@ export function AddRoute({ uid }) {
                 showMain={false}
                 setCoordinates={handleSetCoordinates}
               />
+            </div>
+          </div>
+          <div className='px-4 md:px-6 flex flex-col'>
+            <p className='text-sm md:text-base    text-gray-700'>
+              Puntos de referencia
+            </p>
+            <div className='w-full h-48 rounded-xl overflow-hidden'>
+              <MarkerMapLimit setWaypoints={handleSetWaypoints} />
             </div>
           </div>
           <div className='border-t p-4 md:p-6 flex '>
