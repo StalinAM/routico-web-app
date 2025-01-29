@@ -5,7 +5,6 @@ import { useRouteStore } from '../store/useRouteStore'
 
 export function MarkersMap({ showMain = true, setCoordinates = () => {} }) {
   const { routes, route } = useRouteStore()
-  console.log(routes)
 
   if (showMain) {
     return (
@@ -39,7 +38,7 @@ export function MarkersMap({ showMain = true, setCoordinates = () => {} }) {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      <LocateUser setCoordinates={setCoordinates} />
+      <LocateUser setCoordinates={setCoordinates} address={route.address} />
     </MapContainer>
   )
 }
