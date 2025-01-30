@@ -7,8 +7,8 @@ export function HeaderDriver() {
 
   return (
     <header className='flex justify-between items-center'>
-      <div>
-        <h1 className='text-xl font-bold'>{route.routeName}</h1>
+      <div className='border rounded-xl py-2 px-4'>
+        <h1 className='text-lg font-bold'>{route.routeName}</h1>
         <p className='flex gap-1 items-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -20,11 +20,12 @@ export function HeaderDriver() {
             strokeWidth='2'
             strokeLinecap='round'
             strokeLinejoin='round'
+            className='w-4'
           >
             <path stroke='none' d='M0 0h24v24H0z' fill='none' />
             <path d='M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2' />
           </svg>
-          <span>{route.phoneNumber}</span>
+          <span className='text-sm'>{route.phoneNumber}</span>
         </p>
       </div>
       <button
