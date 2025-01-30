@@ -23,7 +23,7 @@ const decodedCookie = await auth.verifySessionCookie(sessionCookie)
     class='flex gap-1 items-center text-xl font-bold justify-center text-azur-800'
   />
   <div class='flex items-center gap-x-2'>
-    <h1 class='capitalize text-xl'>{decodedCookie.name}</h1>
+    <h1 class='capitalize font-bold text-lg'>{decodedCookie.name}</h1>
     <form action='/api/auth/logout'>
       <button
         class='flex gap-1 items-center hover:bg-azur-800 hover:text-azur-50 rounded-xl px-2 py-2 [&_svg]:w-5'
