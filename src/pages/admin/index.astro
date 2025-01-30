@@ -27,10 +27,10 @@ if (user.email?.match(/@routico.ec/)) {
 
 <LayoutAdmin>
   <Main
-    class='relative max-h-[calc(100dvh-52px)] bg-azur-200/20 p-4 md:p-6 grid grid-rows-[100px_auto_200px] lg:grid-rows-[100px_auto] lg:grid-cols-[1fr_320px] gap-4 md:gap-6 pb-16 sm:pb-6'
+    class='relative max-h-[calc(100dvh-52px)] bg-[url(/circle-bg.svg)] bg-no-repeat bg-cover bg-center p-4 md:p-6 grid grid-rows-[80px_auto_200px] lg:grid-rows-[100px_auto] lg:grid-cols-[1fr_320px] gap-4 md:gap-6 pb-16 sm:pb-6'
   >
     <section
-      class='bg-azur-50 rounded-xl lg:col-start-1 lg:col-end-3 p-4 flex flex-wrap gap-4 lg:justify-around'
+      class='bg-azur-50 rounded-xl border lg:col-start-1 lg:col-end-3 px-4 py-2 md:p-4 flex flex-wrap gap-4 lg:justify-around'
     >
       <Count uid={decodedCookie.uid} data='conductores' client:load />
       <Count uid={decodedCookie.uid} data='rutas' client:load />
@@ -38,7 +38,7 @@ if (user.email?.match(/@routico.ec/)) {
     <section class='rounded-xl overflow-hidden'>
       <MarkersMap client:only />
     </section>
-    <section class='overflow-hidden bg-azur-50 p-4 rounded-xl'>
+    <section class='overflow-hidden bg-azur-50 p-4 rounded-xl border'>
       <ul
         class='overflow-y-auto max-h-full h-auto grid grid-cols-[repeat(auto-fit,minmax(250px,300px))] gap-2 justify-center'
       >

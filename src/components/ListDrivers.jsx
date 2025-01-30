@@ -51,11 +51,11 @@ export function ListDrivers({ uid }) {
   return (
     <ul className='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6 justify-center'>
       {filteredDrivers.map((driver) => (
-        <li key={driver.docId}>
+        <li className='rounded-xl' key={driver.docId}>
           <article className='bg-azur-50 rounded-xl p-4 flex flex-col gap-2 border-2 border-azur-800'>
-            <header className='py-2 border-b-2 flex justify-between items-center'>
+            <header className='pb-2 border-b-2 flex justify-between items-center'>
               <div className=''>
-                <h2 className='font-bold text-xl capitalize'>
+                <h2 className='font-bold text-base md:text-lg capitalize'>
                   {driver.name} {driver.lastName}
                 </h2>
                 <p className='flex gap-1 items-center'>
@@ -73,7 +73,7 @@ export function ListDrivers({ uid }) {
                     <path stroke='none' d='M0 0h24v24H0z' fill='none' />
                     <path d='M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2' />
                   </svg>
-                  <span>{driver.phoneNumber}</span>
+                  <span className='text-sm'>{driver.phoneNumber}</span>
                 </p>
               </div>
               <div className='flex items-center gap-2'>
@@ -106,7 +106,7 @@ export function ListDrivers({ uid }) {
                 </button>
               </div>
             </header>
-            <h3 className='font-bold'>Credenciales:</h3>
+            <h3 className='font-bold text-base\'>Credenciales:</h3>
             <p>
               <strong>Email:</strong> {driver.email}
             </p>

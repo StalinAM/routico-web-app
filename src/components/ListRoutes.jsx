@@ -25,7 +25,7 @@ export function ListRoutes({ uid, simple }) {
     setOpenModal(true)
   }
   return (
-    <ul className='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6 justify-center'>
+    <ul className='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-4 justify-center'>
       {filteredRoutes.map((route) => (
         <li key={route.docId}>
           <article className='flex flex-col gap-2 text-sm md:text-base bg-azur-50 justify-between p-4 border-2 border-azur-600 rounded-lg bg-azur-200/20'>
