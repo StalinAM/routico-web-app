@@ -1,15 +1,28 @@
-export function CloseButton({ setOpenModal, data, setObject, setFormData }) {
+export function CloseButton({
+  setOpenModal,
+  data,
+  setObject,
+  setFormData,
+  setIsClosing
+}) {
+  const handleClose = () => {
+    setIsClosing(true)
+    setTimeout(() => {
+      setOpenModal(false)
+      setObject({})
+      setFormData(
+        Object.fromEntries(
+          Object.keys(data).map((key) =>
+            key == 'routes' ? [key, []] : [key, '']
+          ) // Cambia cada valor a una cadena vacía
+        )
+      ) // Aseguramos valores por defecto
+      setIsClosing(false)
+    }, 300)
+  }
   return (
     <button
-      onClick={() => {
-        setOpenModal(false)
-        setObject({})
-        setFormData(
-          Object.fromEntries(
-            Object.keys(data).map((key) => [key, '']) // Cambia cada valor a una cadena vacía
-          )
-        )
-      }}
+      onClick={handleClose}
       className='cursor-pointer hover:bg-azur-800 rounded-md p-1 hover:text-azur-50'
     >
       <svg

@@ -15,7 +15,7 @@ export function AddRoutesDriver({ uid }) {
   } = useAuthStore()
   const filteredRoutes = getFilteredRoutes()
   const [selectedRoutes, setSelectedRoutes] = useState([])
-
+  const [isClosing, setIsClosing] = useState(false)
   useEffect(() => {
     // Cargar las rutas solo si no se han cargado
     if (!route.length) {
@@ -62,14 +62,25 @@ export function AddRoutesDriver({ uid }) {
     // Mostrar los docIds en la consola después de actualizar el estado
     await updateDriver(driver.docId, newDriver)
     fetchdrivers(uid)
-    setOpenModalRoutes(false)
-    setSelectedRoutes([])
+    closeModal()
+  }
+  const closeModal = () => {
+    setIsClosing(true)
+    setTimeout(() => {
+      setOpenModalRoutes(false)
+      setIsClosing(false)
+      setSelectedRoutes([])
+    }, 400) // Tiempo de la animación
   }
 
   if (!openModalRoutes) return null
   return (
     <div className='fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full'>
-      <div className='bg-azur-50 rounded-xl w-full max-w-sm flex flex-col gap-y-6'>
+      <div
+        className={`bg-azur-50 rounded-xl w-full max-w-sm flex flex-col gap-y-6 ${
+          isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
+        }`}
+      >
         <div className='border-b p-6 flex justify-between items-center'>
           <h3 className='text-center font-semibold text-xl'>
             Agregar Rutas a {driver.name}
@@ -78,6 +89,8 @@ export function AddRoutesDriver({ uid }) {
             data={driver}
             setOpenModal={setOpenModalRoutes}
             setObject={setDriver}
+            setIsClosing={setIsClosing}
+            setFormData={() => {}}
           />
         </div>
         <form

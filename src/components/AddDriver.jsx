@@ -10,7 +10,7 @@ import { CloseButton } from './CloseButton'
 export function AddDriver({ uid }) {
   const { fetchdrivers, setOpenModal, openModal, driver, setDriver } =
     useAuthStore()
-
+  const [isClosing, setIsClosing] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     lastName: '',
@@ -86,14 +86,26 @@ export function AddDriver({ uid }) {
       email: '',
       password: ''
     })
+
     fetchdrivers(uid)
-    setOpenModal(false)
+    closeModal()
+  }
+  const closeModal = () => {
+    setIsClosing(true)
+    setTimeout(() => {
+      setOpenModal(false)
+      setIsClosing(false)
+    }, 400) // Tiempo de la animación
   }
   if (!openModal) return null
 
   return (
     <div className='fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full'>
-      <div className='bg-azur-50 rounded-xl w-full max-w-sm flex flex-col gap-y-4'>
+      <div
+        className={`bg-azur-50 overflow-y-scroll rounded-xl w-full max-w-xs md:max-w-sm lg:max-w-md max-h-[80%] flex flex-col gap-y-4 ${
+          isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
+        }`}
+      >
         <div className='border-b p-6 flex justify-between items-center'>
           <h3 className='text-center font-semibold text-xl'>
             {driver?.email ? 'Actualizar conductor' : 'Nuevo conductor'}
@@ -103,6 +115,7 @@ export function AddDriver({ uid }) {
             setOpenModal={setOpenModal}
             setObject={setDriver}
             setFormData={setFormData}
+            setIsClosing={setIsClosing}
           />
         </div>
         <form onSubmit={handleSubmit} className='w-full flex flex-col gap-y-4'>
