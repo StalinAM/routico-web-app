@@ -12,10 +12,10 @@ export function Count({ data, uid }) {
 
   const filteredDrivers = getFilteredDrivers()
 
-  if (data === 'rutas') {
+  if (data === 'conductores') {
     return (
-      <div class='flex items-center gap-x-4'>
-        <div class='rounded-full bg-azur-400 p-2 md:p-3 text-azur-800'>
+      <div className='flex items-center gap-x-4'>
+        <div className='rounded-full bg-azur-400 p-2 md:p-3 text-azur-800'>
           <svg
             className='w-8 h-8 md:w-10 md:h-10'
             xmlns='http://www.w3.org/2000/svg'
@@ -35,20 +35,20 @@ export function Count({ data, uid }) {
           </svg>
         </div>
         <div>
-          <h2 class='text-gray-500 text-center text-sm md:text-base capitalize'>
+          <h2 className='text-gray-500 text-center text-sm md:text-base capitalize'>
             {data}
           </h2>
-          <p class='text-2xl md:text-3xl text-azur-600 font-bold'>
+          <p className='text-2xl md:text-3xl text-azur-600 font-bold'>
             {routes.length}
           </p>
         </div>
       </div>
     )
   }
-  if (data === 'conductores') {
+  if (data === 'rutas') {
     return (
-      <div class='flex items-center gap-x-4'>
-        <div class='rounded-full bg-azur-400 p-2 md:p-3 text-azur-800'>
+      <div className='flex items-center gap-x-4'>
+        <div className='rounded-full bg-azur-400 p-2 md:p-3 text-azur-800'>
           <svg
             className='w-8 h-8 md:w-10 md:h-10'
             xmlns='http://www.w3.org/2000/svg'
@@ -69,10 +69,10 @@ export function Count({ data, uid }) {
           </svg>
         </div>
         <div>
-          <h2 class='text-gray-500 text-center text-sm md:text-base capitalize'>
+          <h2 className='text-gray-500 text-center text-sm md:text-base capitalize'>
             {data}
           </h2>
-          <p class='text-2xl md:text-3xl text-azur-600 font-bold'>
+          <p className='text-2xl md:text-3xl text-azur-600 font-bold'>
             {filteredDrivers.length}
           </p>
         </div>
