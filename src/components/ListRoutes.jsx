@@ -38,7 +38,7 @@ export function ListRoutes({ uid, simple }) {
                 {simple && (
                   <button
                     onClick={() => openRouteModal(route)}
-                    className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1'
+                    className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1 hover:scale-105 ease-in-out transition-all duration-300'
                   >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'

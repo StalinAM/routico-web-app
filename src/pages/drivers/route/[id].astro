@@ -28,10 +28,10 @@ const { id } = Astro.params
 
 <LayoutRoute>
   <HeaderDriver client:load />
-  <section class='rounded-xl overflow-hidden min-h-[50%]'>
+  <section class='rounded-xl overflow-hidden'>
     <Map uid={decodedCookie.uid} id={id} client:only />
   </section>
-  <section>
-    <!-- <DetailsDelivery client:load /> -->
-  </section>
+  <!-- <section>
+    <DetailsDelivery client:load />
+  </section> -->
 </LayoutRoute>

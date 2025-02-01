@@ -9,7 +9,7 @@ export function HeaderDriver() {
     <header className='flex justify-between items-center'>
       <div className='border rounded-xl py-2 px-4'>
         <h1 className='text-lg font-bold'>{route.routeName}</h1>
-        <p className='flex gap-1 items-center'>
+        <p className='flex gap-1 items-center hover:scale-105 ease-in-out transition-all duration-300'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='20'

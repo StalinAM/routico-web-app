@@ -55,7 +55,7 @@ export function ListDrivers({ uid }) {
           <article className='bg-azur-50 rounded-xl p-4 flex flex-col gap-2 border-2 border-azur-800'>
             <header className='pb-2 border-b-2 flex justify-between items-center'>
               <div className=''>
-                <h2 className='font-bold text-base md:text-lg capitalize'>
+                <h2 className='font-bold text-lg  capitalize'>
                   {driver.name} {driver.lastName}
                 </h2>
                 <p className='flex gap-1 items-center'>
@@ -79,13 +79,13 @@ export function ListDrivers({ uid }) {
               <div className='flex items-center gap-2'>
                 <button
                   onClick={() => openRouteModal(driver)}
-                  className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1'
+                  className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1 hover:bg-azur-600 hover:scale-105 ease-in-out transition-all duration-200'
                 >
                   <AddRouteI />
                 </button>
                 <button
                   onClick={() => openDriverModal(driver)}
-                  className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1'
+                  className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1 hover:bg-azur-600 hover:scale-105 ease-in-out transition-all duration-200'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -106,18 +106,21 @@ export function ListDrivers({ uid }) {
                 </button>
               </div>
             </header>
-            <h3 className='font-bold text-base\'>Credenciales:</h3>
+            <h3 className='text-sm text-gray-700'>Credenciales:</h3>
             <p>
               <strong>Email:</strong> {driver.email}
             </p>
-            <div className='flex justify-between'>
+            <div className='flex justify-between items-center'>
               <p>
                 <strong>Contraseña:</strong>{' '}
                 {visiblePasswords[driver.docId]
                   ? driver.password
                   : '************'}
               </p>
-              <button onClick={() => togglePasswordVisibility(driver.docId)}>
+              <button
+                className='bg-slate-100 rounded p-1 hover:scale-105 ease-in-out transition-all duration-300'
+                onClick={() => togglePasswordVisibility(driver.docId)}
+              >
                 {!visiblePasswords[driver.docId] ? (
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -155,8 +158,8 @@ export function ListDrivers({ uid }) {
               </button>
             </div>
             <div className='border-t-2 pt-2'>
-              <h3 className='font-bold'>Rutas:</h3>
-              <ul className='route-list'>
+              <h3 className='text-sm text-gray-700'>Rutas:</h3>
+              <ul>
                 {driver?.routes?.map((routeId, index) => {
                   const matchedRoute = routes.find(
                     (route) => route.docId === routeId
