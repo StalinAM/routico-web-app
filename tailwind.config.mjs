@@ -15,17 +15,17 @@ export default {
     },
     keyframes: {
       'scale-up-center': {
-        '0%': { transform: 'scale(0.5)' },
-        '100%': { transform: 'scale(1)' }
+        '0%': { transform: 'translateY(20px)', opacity: '0' },
+        '100%': { transform: 'translateY(0)', opacity: '1' }
       },
       'scale-down-center': {
-        '0%': { transform: 'scale(1)' },
-        '100%': { transform: 'scale(0.5)' }
+        '0%': { transform: 'translateY(0)', opacity: '1' },
+        '100%': { transform: 'translateY(-20px)', opacity: '0' }
       }
     },
     animation: {
-      'scale-up-center': 'scale-up-center 0.3s ease-out',
-      'scale-down-center': 'scale-down-center 0.3s ease-out'
+      'scale-up-center': 'scale-up-center 0.4s ease-out',
+      'scale-down-center': 'scale-down-center 0.4s ease-out'
     }
   },
   plugins: []

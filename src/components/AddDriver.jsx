@@ -100,7 +100,11 @@ export function AddDriver({ uid }) {
   if (!openModal) return null
 
   return (
-    <div className='fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full'>
+    <div
+      className={`fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full ${
+        isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
+      }`}
+    >
       <div
         className={`bg-azur-50 overflow-y-scroll rounded-xl w-full max-w-xs md:max-w-sm lg:max-w-md max-h-[80%] flex flex-col gap-y-4 ${
           isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'

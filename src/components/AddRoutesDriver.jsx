@@ -75,7 +75,11 @@ export function AddRoutesDriver({ uid }) {
 
   if (!openModalRoutes) return null
   return (
-    <div className='fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full'>
+    <div
+      className={`fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full ${
+        isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
+      }`}
+    >
       <div
         className={`bg-azur-50 rounded-xl w-full max-w-sm flex flex-col gap-y-6 ${
           isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
