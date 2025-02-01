@@ -30,7 +30,7 @@ if (user.email?.match(/@routico.ec/)) {
     class='relative max-h-[calc(100dvh-52px)] bg-[url(/circle-bg.svg)] bg-no-repeat bg-cover bg-center p-4 md:p-6 grid grid-rows-[80px_auto_200px] lg:grid-rows-[100px_auto] lg:grid-cols-[1fr_320px] gap-4 md:gap-6 pb-16 sm:pb-6'
   >
     <section
-      class='bg-azur-50 rounded-xl border lg:col-start-1 lg:col-end-3 px-4 py-2 md:p-4 flex flex-wrap gap-4 lg:justify-around'
+      class='bg-azur-50 rounded-xl border lg:col-start-1 lg:col-end-3 px-4 py-2 lg:p-4 flex flex-wrap gap-4 lg:justify-around'
     >
       <Count uid={decodedCookie.uid} data='conductores' client:load />
       <Count uid={decodedCookie.uid} data='rutas' client:load />
