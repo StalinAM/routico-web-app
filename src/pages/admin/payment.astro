@@ -81,14 +81,14 @@ const data = [
                 <main class=''>
                   <ul class='[&>li]:flex [&>li]:items-center [&>li]:gap-x-2 flex flex-col gap-3 p-6'>
                     {item.features.map((feature) => (
-                      <li>
-                        <Check class='text-azur-600' />
-                        {feature}
+                      <li class='flex items-start gap-x-2'>
+                        <Check class='text-azur-600 flex-shrink-0' />
+                        <p class='flex-1'>{feature}</p>
                       </li>
                     ))}
                   </ul>
                   <div class='p-6 border-t'>
-                    <button class='w-full bg-azur-600 text-azur-50/90 border-2 border-azur-600 rounded-xl py-2 px-4 hover:bg-azur-800 hover:text-azur-50'>
+                    <button class='w-full bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 transition-all duration-300 hover:text-azur-50'>
                       Mejorar
                     </button>
                   </div>
