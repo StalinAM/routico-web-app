@@ -3,6 +3,7 @@ import { getAuth } from 'firebase-admin/auth'
 import { app } from '../../lib/firebase/server'
 import LayoutRoute from '../../layouts/LayoutRoute.astro'
 import { ListRoutesDriver } from '../../components/ListRoutesDriver'
+import { MarkerUserRoute } from '../../components/MarkerUserRoute'
 
 export const prerender = false
 const auth = getAuth(app)
@@ -26,6 +27,9 @@ console.log(decodedCookie.uid)
 
 <LayoutRoute>
   <h1 class='text-xl font-bold text-azur-800'>Lista de rutas</h1>
+  <section class='rounded-xl overflow-hidden min-h-80 sticky top-4 shadow-md'>
+    <MarkerUserRoute client:only />
+  </section>
   <section>
     <ul class='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6'>
       <ListRoutesDriver uid={user.uid} client:load />
