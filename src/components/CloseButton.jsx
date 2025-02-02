@@ -23,7 +23,7 @@ export function CloseButton({
   return (
     <button
       onClick={handleClose}
-      className='cursor-pointer hover:bg-azur-800 rounded-md p-1 hover:text-azur-50'
+      className='cursor-pointer transition-colors ease-in-out duration-300 hover:bg-azur-800 rounded-md p-1 hover:text-azur-50'
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'
