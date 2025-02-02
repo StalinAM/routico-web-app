@@ -10,7 +10,7 @@ export function WrapperRoutes({ uid }) {
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <button
         onClick={() => setOpenModal(true)}
-        className='flex items-center gap-x-1 bg-azur-600 text-azur-50/80 border rounded-xl py-2 px-4 hover:bg-azur-800 hover:text-azur-50 hover:scale-105 ease-in-out transition-all duration-200'
+        className='flex items-center gap-x-1 bg-azur-800 text-azur-50/80 border rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 hover:scale-105 ease-in-out transition-all duration-200'
       >
         <AddRouteI />
         Agregar

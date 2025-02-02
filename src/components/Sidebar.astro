@@ -44,7 +44,7 @@ const currentPath = Astro.url.pathname
           <li class=''>
             <a
               href={item.url}
-              class={`flex gap-2 items-center py-2 px-2 hover:bg-azur-800 rounded-xl hover:text-azur-50/90 cursor-pointer ${currentPath === item.url ? 'bg-azur-800 text-azur-50' : ''}`}
+              class={`flex gap-2 items-center py-2 px-2 hover:bg-azur-800 duration-300 transition-all ease-in-out rounded-xl hover:text-azur-50/90 cursor-pointer ${currentPath === item.url ? 'bg-azur-800 text-azur-50' : ''}`}
             >
               <item.icon />
               <span class='hidden md:block'>{item.name}</span>
