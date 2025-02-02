@@ -33,7 +33,7 @@ export function ListRoutesDriver({ uid, displayButton = true }) {
     <>
       {routes?.map((route) => (
         <li key={route.docId}>
-          <article className='flex bg-azur-50 justify-between items-center p-4 border-2 border-azur-600 rounded-lg bg-azur-200/20'>
+          <article className='flex bg-azur-50 justify-between items-center p-4 border-2 border-azur-800 rounded-lg bg-azur-200/20'>
             <div className='w-full pr-4'>
               <header className='pb-2 border-b-2 flex intems center justify-between'>
                 <div className='flex gap-x-2 items-center text-lg font-bold'>
@@ -44,7 +44,7 @@ export function ListRoutesDriver({ uid, displayButton = true }) {
               </header>
               <h3 className='pt-2 text-sm text-gray-600'>Datos de entrega:</h3>
               <p>
-                <strong>Cliente: </strong>
+                <strong>Nombre: </strong>
                 <span>{route.name}</span>
               </p>
               <p>

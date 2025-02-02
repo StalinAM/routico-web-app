@@ -52,8 +52,11 @@ export function ListDrivers({ uid }) {
   return (
     <ul className='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-6 justify-center'>
       {filteredDrivers.map((driver) => (
-        <li className='rounded-xl' key={driver.docId}>
-          <article className='bg-azur-50 rounded-xl p-4 flex flex-col gap-2 border-2 border-azur-800'>
+        <li
+          className='rounded-xl hover:shadow-md transition-shadow ease-out duration-300'
+          key={driver.docId}
+        >
+          <article className='bg-azur-50 h-full rounded-xl p-4 flex flex-col gap-2 border-2 border-azur-800'>
             <header className='pb-2 border-b-2 flex justify-between items-center'>
               <div className=''>
                 <h2 className='font-bold text-lg  capitalize'>

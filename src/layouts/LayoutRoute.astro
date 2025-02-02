@@ -1,6 +1,7 @@
 ---
 import '@fontsource-variable/onest'
 import HeaderRoute from '../components/HeaderRoute.astro'
+import '../style/globals.css'
 ---
 
 <!doctype html>
@@ -14,7 +15,7 @@ import HeaderRoute from '../components/HeaderRoute.astro'
   </head>
   <body class='grid grid-rows-[52px_1fr] grid-cols-1'>
     <HeaderRoute />
-    <main class='p-4 md:p-6 flex flex-col gap-y-4 min-h-[calc(100vh-52px)]'>
+    <main class='p-4 md:p-6 flex flex-col gap-y-4'>
       <slot />
     </main>
   </body>

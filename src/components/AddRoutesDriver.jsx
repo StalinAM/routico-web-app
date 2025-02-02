@@ -83,7 +83,7 @@ export function AddRoutesDriver({ uid }) {
       }`}
     >
       <div
-        className={`bg-azur-50 rounded-xl w-full max-w-sm flex flex-col gap-y-6 ${
+        className={`bg-azur-50 rounded-xl w-full max-w-xs md:max-w-sm lg:max-w-md flex flex-col gap-y-6 ${
           isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
         }`}
       >
@@ -104,7 +104,7 @@ export function AddRoutesDriver({ uid }) {
           className='w-full px-6 flex flex-col gap-y-2'
         >
           <h4>Lista de Rutas</h4>
-          <div className=' flex flex-wrap gap-x-4 gap-y-3 pb-4'>
+          <div className=' flex flex-col items-center md:flex-row md:flex-wrap gap-x-4 gap-y-3 pb-4'>
             {loading ? (
               <p>Cargando rutas...</p>
             ) : filteredRoutes.length === 0 ? (
