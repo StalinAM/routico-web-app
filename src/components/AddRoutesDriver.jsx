@@ -3,6 +3,7 @@ import { useRouteStore } from '../store/useRouteStore'
 import { CloseButton } from './CloseButton'
 import { useAuthStore } from '../store/useAuthStore'
 import { updateDriver } from '../utils/firebase/service'
+import { toast, Toaster } from 'sonner'
 
 export function AddRoutesDriver({ uid }) {
   const { route, fetchRoutes, loading, getFilteredRoutes } = useRouteStore()
@@ -62,6 +63,7 @@ export function AddRoutesDriver({ uid }) {
     // Mostrar los docIds en la consola después de actualizar el estado
     await updateDriver(driver.docId, newDriver)
     fetchdrivers(uid)
+    toast.success(`Rutas asignadas correctamente a ${driver.name}`)
     closeModal()
   }
   const closeModal = () => {
@@ -99,10 +101,10 @@ export function AddRoutesDriver({ uid }) {
         </div>
         <form
           onSubmit={handleSubmit}
-          className='w-full px-6 flex flex-col gap-y-4'
+          className='w-full px-6 flex flex-col gap-y-2'
         >
           <h4>Lista de Rutas</h4>
-          <div className=' flex flex-wrap gap-x-4 gap-y-3'>
+          <div className=' flex flex-wrap gap-x-4 gap-y-3 pb-4'>
             {loading ? (
               <p>Cargando rutas...</p>
             ) : filteredRoutes.length === 0 ? (
@@ -111,7 +113,7 @@ export function AddRoutesDriver({ uid }) {
               filteredRoutes.map((route, index) => (
                 <label
                   key={route.docId}
-                  className='border rounded-lg px-3 py-1 ring-1 ring-transparent border-azur-600 hover:bg-azur-800 hover:text-azur-50 has-[:checked]:bg-azur-800 has-[:checked]:text-azur-50 cursor-pointer'
+                  className='border rounded-lg px-3 py-1 ring-1 ring-transparent hover:bg-azur-800 hover:text-azur-50 has-[:checked]:bg-azur-800 has-[:checked]:text-azur-50 cursor-pointer transition-colors duration-300 ease-in-out'
                 >
                   <input
                     className='hidden '
@@ -124,12 +126,12 @@ export function AddRoutesDriver({ uid }) {
               ))
             )}
           </div>
-          <div className='border-t p-6'>
+          <div className='border-t py-6'>
             <button
               type='submit'
-              className='w-full bg-azur-600 text-azur-50/90 border-2 border-azur-600 rounded-xl py-2 px-4 hover:bg-azur-800 hover:text-azur-50'
+              className='w-full bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
             >
-              Agregar ruta
+              Agregar rutas
             </button>
           </div>
         </form>

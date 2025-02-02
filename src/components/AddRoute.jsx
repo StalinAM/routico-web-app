@@ -5,6 +5,7 @@ import { useRouteStore } from '../store/useRouteStore'
 import { MarkersMap } from './MarkersMap'
 import { routes } from '../lib/routes'
 import { MarkerMapLimit } from './MarkersMapLimit'
+import { toast, Toaster } from 'sonner'
 
 export function AddRoute({ uid }) {
   const { setOpenModal, setRoute, route, openModal, fetchRoutes } =
@@ -66,6 +67,7 @@ export function AddRoute({ uid }) {
         uidAdmin: uid
       }
       await addRoute(completeData)
+      toast.success(`Ruta ${completeData.routeName} agregada correctamente`)
     } else {
       const completeData = {
         ...route,
@@ -76,6 +78,8 @@ export function AddRoute({ uid }) {
         uidAdmin: uid
       }
       await updateRoute(route.docId, completeData)
+      toast.success(`Ruta ${completeData.routeName} actualizada correctamente`)
+
       setRoute({})
     }
     fetchRoutes(uid)
@@ -104,7 +108,7 @@ export function AddRoute({ uid }) {
           isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
         }`}
       >
-        <div className='border-b p-4 md:p-6 flex justify-between items-center'>
+        <div className='border-b p-4 md:p-6 flex justify-between items-center sticky top-0 bg-azur-50 z-50'>
           <h3 className='text-center font-semibold text-xl'>
             {route?.name ? 'Actualizar ruta' : 'Nueva ruta'}
           </h3>
@@ -168,8 +172,8 @@ export function AddRoute({ uid }) {
             />
           </label>
           <div className='px-4 md:px-6 flex flex-col'>
-            <p className='text-sm md:text-base    text-gray-700'>Dirección</p>
-            <div className='w-full h-48 rounded-xl overflow-hidden'>
+            <p className='text-sm md:text-base text-gray-700'>Dirección</p>
+            <div className='w-full h-48 rounded-xl overflow-hidden z-10'>
               <MarkersMap
                 showMain={false}
                 setCoordinates={handleSetCoordinates}
@@ -177,17 +181,17 @@ export function AddRoute({ uid }) {
             </div>
           </div>
           <div className='px-4 md:px-6 flex flex-col'>
-            <p className='text-sm md:text-base    text-gray-700'>
+            <p className='text-sm md:text-base text-gray-700'>
               Puntos de referencia
             </p>
-            <div className='w-full h-48 rounded-xl overflow-hidden'>
+            <div className='w-full h-48 rounded-xl overflow-hidden z-10'>
               <MarkerMapLimit setWaypoints={handleSetWaypoints} />
             </div>
           </div>
           <div className='border-t p-4 md:p-6 flex '>
             <button
               type='submit'
-              className='w-full bg-azur-600 text-azur-50/90 border-2 border-azur-600 rounded-xl py-2 px-4 hover:bg-azur-800 hover:text-azur-50'
+              className='w-full bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
             >
               Agregar ruta
             </button>

@@ -6,6 +6,7 @@ import {
 } from '../utils/firebase/service'
 import { useAuthStore } from '../store/useAuthStore'
 import { CloseButton } from './CloseButton'
+import { toast } from 'sonner'
 
 export function AddDriver({ uid }) {
   const { fetchdrivers, setOpenModal, openModal, driver, setDriver } =
@@ -64,6 +65,7 @@ export function AddDriver({ uid }) {
         uidDriver: uidDriver
       }
       await addDriver(completeData)
+      toast.success(`Conductor ${completeData.name} agregado correctamente`)
       setDriver({})
     } else {
       // Crear el objeto completo antes de actualizar el estado
@@ -77,6 +79,7 @@ export function AddDriver({ uid }) {
 
       // Actualizar el estado con los datos generados
       await updateDriver(driver.docId, completeData)
+      toast.success(`Conductor ${completeData.name} actualizado correctamente`)
       setDriver({})
     }
     setFormData({
@@ -167,7 +170,7 @@ export function AddDriver({ uid }) {
           <div className='border-t p-6'>
             <button
               type='submit'
-              className='w-full bg-azur-600 text-azur-50/90 border-2 border-azur-600 rounded-xl py-2 px-4 hover:bg-azur-800 hover:text-azur-50'
+              className='w-full bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
             >
               Agregar conductor
             </button>
