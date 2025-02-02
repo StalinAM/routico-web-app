@@ -6,6 +6,7 @@ import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
 import { getAuth } from 'firebase-admin/auth'
 import { app } from '../../lib/firebase/server'
 import { Wrapper } from '../../components/Wrapper'
+import { Toaster } from 'sonner'
 
 export const prerender = false
 const auth = getAuth(app)
@@ -32,4 +33,14 @@ const decodedCookie = await auth.verifySessionCookie(sessionCookie)
       <ListDrivers uid={decodedCookie.uid} client:load />
     </section>
   </Main>
+  <Toaster
+    position='bottom-right'
+    toastOptions={{
+      classNames: {
+        toast: 'border-2 border-azur-800 w-fit right-0',
+        icon: 'text-azur-800'
+      }
+    }}
+    client:load
+  />
 </LayoutAdmin>
