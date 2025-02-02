@@ -28,9 +28,9 @@ export function ListRoutes({ uid, simple }) {
     <ul className='grid grid-cols-[repeat(auto-fit,minmax(250px,350px))] gap-4 justify-center'>
       {filteredRoutes.map((route) => (
         <li key={route.docId}>
-          <article className='flex flex-col gap-2 text-sm md:text-base bg-azur-50 justify-between p-4 border-2 border-azur-600 rounded-lg bg-azur-200/20'>
+          <article className='flex flex-col gap-2 text-sm bg-azur-50 justify-between p-4 border-2 border-azur-600 rounded-lg bg-azur-200/20'>
             <header className='w-full pb-2 border-b-2 flex intems-center justify-between'>
-              <div className='flex gap-x-2 text-base md:text-xl font-bold'>
+              <div className='flex gap-x-2 text-lg font-bold'>
                 <PingMap />
                 <h2>{route.routeName}</h2>
               </div>
@@ -38,7 +38,7 @@ export function ListRoutes({ uid, simple }) {
                 {simple && (
                   <button
                     onClick={() => openRouteModal(route)}
-                    className='bg-azur-800 text-azur-50 rounded-xl px-3 py-1 hover:scale-105 ease-in-out transition-all duration-300'
+                    className='bg-azur-800 hover:bg-azur-600 text-azur-50 rounded-xl px-3 py-1 hover:scale-105 ease-in-out transition-all duration-300'
                   >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
@@ -67,11 +67,11 @@ export function ListRoutes({ uid, simple }) {
                 )}
               </div>
             </header>
-            <p>
+            <p className='text-base'>
               <strong>Nombre: </strong>
               <span>{route.name}</span>
             </p>
-            <p>
+            <p className='text-base'>
               <strong>Teléfono: </strong>
               <span>{route.phoneNumber}</span>
             </p>
