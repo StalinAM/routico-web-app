@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react'
-import { getDriverRoutes } from '../utils/firebase/service'
+import { getDriverRoutesToday } from '../utils/firebase/service'
 import { Arrow, PingMap } from './icons/Icons'
 import { useRouteStore } from '../store/useRouteStore'
 
 export function ListRoutesDriver({ uid, displayButton = true }) {
   const { routes, setRoutes } = useRouteStore()
+  const [details, setDetails] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchRoutes = async () => {
       setLoading(true)
       try {
-        const fetchedRoutes = await getDriverRoutes(uid)
-        setRoutes(fetchedRoutes)
+        const fetchedRoutes = await getDriverRoutesToday(uid) // 🔥 Ahora usa la función que filtra por el día actual
+        setRoutes(fetchedRoutes.routes)
+        setDetails(fetchedRoutes.routeStatusList)
+        console.log(routes)
       } catch (error) {
         console.error('Error obteniendo rutas:', error)
       } finally {
@@ -40,7 +43,12 @@ export function ListRoutesDriver({ uid, displayButton = true }) {
                   <PingMap />
                   <h2>{route.routeName}</h2>
                 </div>
-                <p className='text-sm text-green-500'>Entregado</p>
+                <p className='text-sm text-green-500'>
+                  {
+                    details.find((detail) => detail.routeId === route.docId)
+                      ?.status
+                  }
+                </p>
               </header>
               <h3 className='pt-2 text-sm text-gray-600'>Datos de entrega:</h3>
               <p>
