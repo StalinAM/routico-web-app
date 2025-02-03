@@ -3,13 +3,14 @@ import RoutineMachine from './RoutineMachine'
 import 'leaflet/dist/leaflet.css'
 import { useRouteStore } from '../store/useRouteStore'
 import { useEffect, useState } from 'react'
-import { getDriverRoutes } from '../utils/firebase/service'
+import { getDriverRoutesToday } from '../utils/firebase/service'
 
 const Map = ({ uid, id }) => {
-  const { setRoute, setRoutes, route } = useRouteStore()
+  const { setRoute, setRoutes, setDetailRoute, routes } = useRouteStore()
   const [origin, setOrigin] = useState(null) // Estado para la ubicación actual
   const [waypoints, setWaypoints] = useState([])
   const [destination, setDestination] = useState(null)
+  const [details, setDetails] = useState([])
 
   useEffect(() => {
     // Obtener la ubicación actual del usuario
@@ -30,12 +31,19 @@ const Map = ({ uid, id }) => {
   useEffect(() => {
     const fetchRoutes = async () => {
       try {
-        const fetchedRoutes = await getDriverRoutes(uid)
-        setRoutes(fetchedRoutes)
-        const selectedRoute = fetchedRoutes.find((route) => route.docId === id)
-        if (selectedRoute) {
+        const fetchedRoutes = await getDriverRoutesToday(uid)
+        setRoutes(fetchedRoutes.routes)
+        setDetails(fetchedRoutes.routeStatusList)
+        const selectedRoute = fetchedRoutes.routes.find(
+          (route) => route.docId === id
+        )
+        const selectedRouteStatus = fetchedRoutes.routeStatusList.find(
+          (detail) => detail.routeId === id
+        )
+
+        if (selectedRoute && selectedRouteStatus) {
           setRoute(selectedRoute)
-          console.log(route)
+          setDetailRoute(selectedRouteStatus)
 
           setDestination(selectedRoute.address)
           setWaypoints(
@@ -50,15 +58,12 @@ const Map = ({ uid, id }) => {
     }
     fetchRoutes()
   }, [uid, id, setRoutes])
-  console.log(origin)
-  console.log(waypoints)
-  console.log(destination)
 
   return (
     <MapContainer
       center={origin || [-0.284917, -78.545485]}
       zoom={13}
-      style={{ width: '100%', height: '500px' }}
+      style={{ width: '100%', height: '100%' }}
     >
       <TileLayer
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
