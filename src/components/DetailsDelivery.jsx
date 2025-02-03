@@ -1,68 +1,51 @@
 import { useState } from 'react'
 import { useRouteStore } from '../store/useRouteStore'
 import { CloseButton } from './CloseButton'
+import { useAuthStore } from '../store/useAuthStore'
 
 export function DetailsDelivery() {
-  const { route } = useRouteStore()
-  const methodsPayment = ['Efectivo', 'Tarjeta de crédito', 'Transferencia']
-  const [selectedPay, setSelectedPay] = useState(null)
+  const { setOpenModalRoutes, openModalRoutes } = useAuthStore()
+  const { route, detailRoute, setRoute } = useRouteStore()
+  const [isClosing, setIsClosing] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault()
+
     console.log('Ruta seleccionada:', route)
     console.log('Método de pago seleccionado:', selectedPay)
   }
-
+  if (!openModalRoutes) return null
   return (
-    <div className='fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full'>
-      <div className='bg-azur-50 overflow-y-scroll rounded-xl w-full max-w-xs md:max-w-sm lg:max-w-md max-h-[80%] flex flex-col gap-y-4'>
-        <div className='border-b p-4 md:p-6 flex justify-between items-center'>
-          <h3 className='text-lg font-bold pt-4 pb-2 border-b-2'>
+    <div
+      className={`fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full ${
+        isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
+      }`}
+    >
+      <div
+        className={`bg-azur-50 overflow-y-scroll rounded-xl w-full max-w-xs md:max-w-sm lg:max-w-md max-h-[80%] flex flex-col gap-y-4 ${
+          isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
+        }`}
+      >
+        <div className='border-b p-4 md:p-6 flex justify-between items-center sticky top-0 bg-azur-50 z-50'>
+          <h3 className='text-center font-semibold text-xl'>
             Detalles de la entrega
           </h3>
           <CloseButton
             data={route}
-            setOpenModal={setOpenModal}
-            setObject={setRoute}
-            setFormData={setFormData}
+            setOpenModal={setOpenModalRoutes}
+            setIsClosing={setIsClosing}
           />
         </div>
-        <form
-          onSubmit={handleSubmit}
-          className='w-full px-4 flex flex-col gap-y-4 bg-azur-50 rounded-xl'
-        >
-          <div className=''>
-            <h4 className='pb-1'>Tipo de pago</h4>
-            <div className=' flex flex-wrap gap-x-4 gap-y-3'>
-              {methodsPayment.map((pay, index) => (
-                <label
-                  key={index}
-                  className={`border rounded-lg px-3 py-1 ring-1 ring-transparent border-azur-600 hover:bg-azur-800 hover:text-azur-50 cursor-pointer ${
-                    selectedPay === pay ? 'bg-azur-800 text-azur-50' : ''
-                  }`}
-                >
-                  <input
-                    className='hidden'
-                    type='radio'
-                    name='payment'
-                    value={pay}
-                    checked={selectedPay === pay}
-                    onChange={() => setSelectedPay(pay)}
-                  />
-                  <span>{pay}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-          <div className='border-t p-4'>
-            <button
-              type='submit'
-              className='w-full bg-azur-600 text-azur-50/90 border-2 border-azur-600 rounded-xl py-2 px-4 hover:bg-azur-800 hover:text-azur-50'
-            >
-              Enviar
-            </button>
-          </div>
-        </form>
+        <section className='px-4 md:px-6 pb-4 md:pb-6'>
+          <p>
+            <strong>Estado de entrega: </strong>
+            {detailRoute.status}
+          </p>
+          <p>
+            <strong>Instrucciones: </strong>
+            {detailRoute.details}
+          </p>
+        </section>
       </div>
     </div>
   )
