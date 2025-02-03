@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useRouteStore } from '../store/useRouteStore'
+import { useAuthStore } from '../store/useAuthStore'
+import { CheckRoute, DetailsRoute } from './icons/Icons'
 
 export function HeaderDriver() {
   const [deliver, setDeliver] = useState(false)
   const { route } = useRouteStore()
-
+  const { setOpenModal, setOpenModalRoutes } = useAuthStore()
   return (
     <header className='flex justify-between items-center'>
       <div className='border rounded-xl py-2 px-4'>
@@ -28,12 +30,22 @@ export function HeaderDriver() {
           <span className='text-sm'>{route.phoneNumber}</span>
         </p>
       </div>
-      <button
-        onClick={() => setDeliver(!deliver)}
-        className='bg-azur-600 text-azur-50 border rounded-xl py-2 px-4 hover:bg-azur-800'
-      >
-        {deliver ? 'Entregado' : 'En camino'}
-      </button>
+      <div className='flex gap-4'>
+        <button
+          onClick={() => setOpenModalRoutes(true)}
+          className='flex gap-2 items-center bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
+        >
+          <DetailsRoute />
+          <span className='hidden md:block'>Detalles</span>
+        </button>
+        <button
+          onClick={() => setOpenModal(true)}
+          className='flex gap-2 items-center bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
+        >
+          <CheckRoute />
+          <span className='hidden md:block'>Entrega</span>
+        </button>
+      </div>
     </header>
   )
 }
