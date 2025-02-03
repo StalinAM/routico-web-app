@@ -7,11 +7,15 @@ import {
   doc,
   addDoc,
   setDoc,
-  updateDoc
+  updateDoc,
+  deleteDoc
 } from 'firebase/firestore'
 import { db, auth } from '../../lib/firebase/client'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-
+const getTodayDate = () => {
+  const today = new Date()
+  return today.toISOString().split('T')[0] // Formato "YYYY-MM-DD"
+}
 export const fetchDrivers = async (uid) => {
   const driversList = []
   const q = query(collection(db, 'drivers'), where('uidAdmin', '==', uid))
@@ -82,25 +86,32 @@ export const updateRoute = async (docId, route) => {
   }
 }
 
-export const getDriverRoutes = async (uidDriver) => {
+export const getDriverRoutesToday = async (uidDriver) => {
   try {
-    // 1. Obtener el documento del conductor desde 'drivers'
-    const q = query(
-      collection(db, 'drivers'),
-      where('uidDriver', '==', uidDriver)
+    const todayDate = getTodayDate() // Fecha actual
+
+    const routesStatusRef = collection(db, 'routes-status')
+    const statusQuery = query(
+      routesStatusRef,
+      where('driverId', '==', uidDriver),
+      where('date', '==', todayDate)
     )
-    const querySnapshot = await getDocs(q)
 
-    const driverData = querySnapshot.docs[0].data()
+    const statusSnapshot = await getDocs(statusQuery)
 
-    // 2. Verificar si tiene rutas asignadas
-    if (!driverData.routes || driverData.routes.length === 0) {
-      console.log('No hay rutas asignadas')
+    if (statusSnapshot.empty) {
+      console.log('No hay rutas activas para hoy.')
       return []
     }
+    const routeStatusList = statusSnapshot.docs.map((doc) => ({
+      statusId: doc.id, // 🔥 Guardamos el ID del documento en 'routes-status'
+      ...doc.data()
+    }))
 
-    // 3. Obtener las rutas desde la colección 'routes'
-    const routesPromises = driverData.routes.map(async (routeId) => {
+    const activeRouteIds = statusSnapshot.docs.map((doc) => doc.data().routeId)
+
+    // 4. Obtener los detalles de las rutas activas desde 'routes'
+    const routesPromises = activeRouteIds.map(async (routeId) => {
       const routeRef = doc(db, 'routes', routeId)
       const routeDoc = await getDoc(routeRef)
       return routeDoc.exists() ? { id: routeDoc.id, ...routeDoc.data() } : null
@@ -108,9 +119,74 @@ export const getDriverRoutes = async (uidDriver) => {
 
     const routes = (await Promise.all(routesPromises)).filter(Boolean)
 
-    return routes
+    return { routes, routeStatusList }
   } catch (e) {
-    console.error('Error obteniendo rutas:', e)
-    return []
+    console.error('Error obteniendo rutas del conductor para hoy:', e)
+    return {}
+  }
+}
+
+export const addOrUpdateRouteStatus = async (routeStatusData) => {
+  try {
+    const routeStatusRef = collection(db, 'routes-status')
+    const todayDate = getTodayDate() // Fecha del día actual
+
+    const { routeId, driverId, status, comments, details } = routeStatusData
+
+    // Verificar si ya existe un documento con el mismo routeId, driverId y fecha actual
+    const q = query(
+      routeStatusRef,
+      where('routeId', '==', routeId),
+      where('driverId', '==', driverId),
+      where('date', '==', todayDate)
+    )
+
+    const querySnapshot = await getDocs(q)
+
+    if (!querySnapshot.empty) {
+      // Si existe, actualizar el documento existente
+      const existingDocRef = querySnapshot.docs[0].ref
+      await updateDoc(existingDocRef, { status, comments, details })
+
+      return existingDocRef.id // Retornar el ID del documento actualizado
+    } else {
+      // Si no existe, agregar un nuevo documento con la fecha actual
+      const newDocRef = await addDoc(routeStatusRef, {
+        ...routeStatusData,
+        routeId,
+        details,
+        driverId,
+        status: status || 'Pendiente', // Estado por defecto
+        comments: comments || '',
+        date: todayDate // Guardamos solo la fecha
+      })
+
+      // Actualizar para incluir el docId
+      await updateDoc(newDocRef, { docId: newDocRef.id })
+    }
+  } catch (e) {
+    console.error('Error al agregar/actualizar el estado de la ruta:', e)
+  }
+}
+export const deleteRouteStatus = async (driverId, routeId, date) => {
+  try {
+    const routesStatusRef = collection(db, 'routes-status')
+    const q = query(
+      routesStatusRef,
+      where('driverId', '==', driverId),
+      where('routeId', '==', routeId),
+      where('date', '==', date)
+    )
+
+    const snapshot = await getDocs(q)
+
+    if (!snapshot.empty) {
+      snapshot.forEach(async (docSnapshot) => {
+        await deleteDoc(doc(db, 'routes-status', docSnapshot.id))
+      })
+      console.log(`Ruta ${routeId} eliminada de routes-status`)
+    }
+  } catch (error) {
+    console.error('Error al eliminar route-status:', error)
   }
 }
