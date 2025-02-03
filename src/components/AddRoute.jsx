@@ -90,7 +90,6 @@ export function AddRoute({ uid }) {
     setIsClosing(true)
     setTimeout(() => {
       setOpenModal(false)
-      setIsClosing(false)
       setRoute({})
       setIsClosing(false)
     }, 400) // Tiempo de la animación
