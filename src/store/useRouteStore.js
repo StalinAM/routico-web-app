@@ -7,6 +7,8 @@ export const useRouteStore = create((set, get) => ({
   openModal: false,
   loading: true,
   searchTerm: '',
+  detailRoute: {},
+  setDetailRoute: (detailRoute) => set({ detailRoute }),
   setRoutes: (routes) => set({ routes }),
   setOpenModal: (value) => set({ openModal: value }),
   setRoute: (route) => set({ route }),
