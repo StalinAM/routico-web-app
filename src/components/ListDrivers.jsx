@@ -22,7 +22,6 @@ export function ListDrivers({ uid }) {
     if (!driversLoaded) {
       fetchdrivers(uid).then(() => setDriversLoaded(true))
     }
-    console.log(drivers)
   }, [uid, fetchdrivers, driversLoaded])
 
   const filteredDrivers = getFilteredDrivers()
@@ -166,7 +165,7 @@ export function ListDrivers({ uid }) {
               <ul>
                 {driver?.routes?.map((routeId, index) => {
                   const matchedRoute = routes.find(
-                    (route) => route.docId === routeId
+                    (route) => route.docId === routeId.id
                   )
                   return (
                     <li key={index}>
