@@ -2,10 +2,10 @@
 import LayoutRoute from '../../../layouts/LayoutRoute.astro'
 import { getAuth } from 'firebase-admin/auth'
 import { app } from '../../../lib/firebase/server'
-import { getDriverRoutes } from '../../../utils/firebase/service'
 import Map from '../../../components/Map'
 import { HeaderDriver } from '../../../components/HeaderDriver'
 import { DetailsDelivery } from '../../../components/DetailsDelivery'
+import { AddDetails } from '../../../components/AddDetails'
 
 export const prerender = false
 
@@ -28,10 +28,9 @@ const { id } = Astro.params
 
 <LayoutRoute>
   <HeaderDriver client:load />
-  <section class='rounded-xl overflow-hidden'>
+  <section class='rounded-xl overflow-hidden h-full z-10'>
     <Map uid={decodedCookie.uid} id={id} client:only />
   </section>
-  <!-- <section>
-    <DetailsDelivery client:load />
-  </section> -->
+  <AddDetails client:load />
+  <DetailsDelivery client:load />
 </LayoutRoute>
