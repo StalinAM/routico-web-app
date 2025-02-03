@@ -9,14 +9,18 @@ export function CloseButton({
     setIsClosing(true)
     setTimeout(() => {
       setOpenModal(false)
-      setObject({})
-      setFormData(
-        Object.fromEntries(
-          Object.keys(data).map((key) =>
-            key == 'routes' ? [key, []] : [key, '']
-          ) // Cambia cada valor a una cadena vacía
-        )
-      ) // Aseguramos valores por defecto
+      if (setObject) {
+        setObject({})
+      }
+      if (setFormData) {
+        setFormData(
+          Object.fromEntries(
+            Object.keys(data).map((key) =>
+              key === 'routes' ? [key, []] : [key, '']
+            )
+          )
+        ) // Aseguramos valores por defecto
+      }
       setIsClosing(false)
     }, 300)
   }
