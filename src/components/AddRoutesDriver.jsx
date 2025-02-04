@@ -98,6 +98,7 @@ export function AddRoutesDriver({ uid }) {
     for (const routeId of selectedRoutes) {
       const routeStatusData = {
         routeId,
+        uidAdmin: driver.uidAdmin,
         details: details[routeId] || '',
         driverId: driver.uidDriver,
         status: 'Pendiente',
