@@ -15,7 +15,6 @@ export function ListRoutesDriver({ uid, displayButton = true }) {
         const fetchedRoutes = await getDriverRoutesToday(uid) // 🔥 Ahora usa la función que filtra por el día actual
         setRoutes(fetchedRoutes.routes)
         setDetails(fetchedRoutes.routeStatusList)
-        console.log(routes)
       } catch (error) {
         console.error('Error obteniendo rutas:', error)
       } finally {
@@ -24,6 +23,8 @@ export function ListRoutesDriver({ uid, displayButton = true }) {
     }
     fetchRoutes()
   }, [uid])
+  console.log(routes)
+  console.log(details)
 
   if (loading) {
     return <p>Cargando rutas...</p>
