@@ -4,6 +4,7 @@ import Maps from '../components/icons/Maps.astro'
 import Card from '../components/icons/Card.astro'
 import Help from '../components/icons/Help.astro'
 import Users from '../components/icons/Users.astro'
+import Delivered from '../components/icons/Delivered.astro'
 const ItemsMenu = [
   {
     name: 'Principal',
@@ -19,6 +20,11 @@ const ItemsMenu = [
     name: 'Conductores',
     icon: Users,
     url: '/admin/drivers'
+  },
+  {
+    name: 'Entregas',
+    icon: Delivered,
+    url: '/admin/deliveries'
   },
   {
     name: 'Planes',
@@ -44,7 +50,7 @@ const currentPath = Astro.url.pathname
           <li class=''>
             <a
               href={item.url}
-              class={`flex gap-2 items-center py-2 px-2 hover:bg-azur-800 duration-300 transition-all ease-in-out rounded-xl hover:text-azur-50/90 cursor-pointer ${currentPath === item.url ? 'bg-azur-800 text-azur-50' : ''}`}
+              class={`flex gap-2 items-center p-2 md:py-2 md:pl-3 md:pr-2 hover:bg-azur-800 duration-300 transition-all ease-in-out rounded-xl hover:text-azur-50/90 cursor-pointer ${currentPath === item.url ? 'bg-azur-800 text-azur-50' : ''}`}
             >
               <item.icon />
               <span class='hidden md:block'>{item.name}</span>
