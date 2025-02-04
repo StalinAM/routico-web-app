@@ -27,7 +27,7 @@ export function Search({ searchTerm, setSearchTerm }) {
         name='search'
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className='border bg-azur-50 border-gray-200 rounded-xl py-2 pl-8 pr-4 w-full'
+        className='border bg-azur-50 border-gray-400 rounded-xl py-2 pl-8 pr-4 w-full'
         placeholder='Buscar por nombre'
       />
     </label>
