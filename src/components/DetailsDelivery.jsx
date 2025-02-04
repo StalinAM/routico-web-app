@@ -5,15 +5,9 @@ import { useAuthStore } from '../store/useAuthStore'
 
 export function DetailsDelivery() {
   const { setOpenModalRoutes, openModalRoutes } = useAuthStore()
-  const { route, detailRoute, setRoute } = useRouteStore()
+  const { route, detailRoute } = useRouteStore()
   const [isClosing, setIsClosing] = useState(false)
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    console.log('Ruta seleccionada:', route)
-    console.log('Método de pago seleccionado:', selectedPay)
-  }
   if (!openModalRoutes) return null
   return (
     <div
