@@ -2,27 +2,47 @@ import { useState } from 'react'
 import { useRouteStore } from '../store/useRouteStore'
 import { CloseButton } from './CloseButton'
 import { useAuthStore } from '../store/useAuthStore'
+import { updateStatusDriver } from '../utils/firebase/service'
 
 export function AddDetails() {
   const { setOpenModal, openModal } = useAuthStore()
-  const { route } = useRouteStore()
-  const methodsPayment = ['Efectivo', 'Tarjeta de crédito', 'Transferencia']
-  const statusOptions = ['Pendiente', 'En camino', 'Entregado'] // 🚀 Opciones de estado
+  const { route, detailRoute } = useRouteStore()
+  const methodsPayment = ['Efectivo', 'Tarjeta de crédito', 'No pago']
+  const statusOptions = ['Pendiente', 'En camino', 'Entregado']
 
-  const [selectedPay, setSelectedPay] = useState(null)
-  const [selectedStatus, setSelectedStatus] = useState('Pendiente') // 🚀 Estado por defecto
+  const [formData, setFormData] = useState({
+    selectedPay: '',
+    status: 'Pendiente',
+    amount: '',
+    comments: ''
+  })
+
   const [isClosing, setIsClosing] = useState(false)
-  const [amount, setAmount] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    console.log('Ruta seleccionada:', route)
-    console.log('Método de pago seleccionado:', selectedPay)
-    console.log('Estado seleccionado:', selectedStatus)
+    // Llamada a la función para actualizar solo los campos existentes
+    try {
+      // Llamar a la función para actualizar los datos del documento
+      await updateStatusDriver(detailRoute.docId, formData)
+
+      console.log('Estado del conductor actualizado correctamente')
+    } catch (error) {
+      console.error('Error al actualizar el estado del conductor:', error)
+    }
   }
 
   if (!openModal) return null
+
   return (
     <div
       className={`fixed flex z-50 justify-center items-center top-0 left-0 w-full bg-slate-400/40 h-full ${
@@ -49,16 +69,14 @@ export function AddDetails() {
           className='w-full flex flex-col gap-y-2 md:gap-y-4'
         >
           <div className='w-full px-4 md:px-6'>
-            <h4 className='pb-1'>Tipo de pago</h4>
+            <h4>Tipo de pago</h4>
             <select
-              value={selectedPay}
-              onChange={(e) => setSelectedPay(e.target.value)}
+              name='selectedPay'
+              value={formData.selectedPay}
+              onChange={handleChange}
               className='w-full border border-gray-200 rounded-xl py-2 px-4 bg-white'
               required
             >
-              <option value='' disabled>
-                Selecciona un método de pago
-              </option>
               {methodsPayment.map((pay, index) => (
                 <option key={index} value={pay}>
                   {pay}
@@ -66,26 +84,29 @@ export function AddDetails() {
               ))}
             </select>
           </div>
+
           <div className='w-full px-4 md:px-6'>
-            <h4 className='pb-1'>Monto</h4>
+            <h4>Monto</h4>
             <input
               type='number'
               min='0'
               step='0.01'
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              name='amount'
+              value={formData.amount}
+              onChange={handleChange}
               className='w-full border border-gray-200 rounded-xl py-2 px-4'
               placeholder='Ingrese el monto'
               required
             />
           </div>
+
           <div className='w-full px-4 md:px-6'>
-            <h4 className='pb-1'>Estado</h4>
+            <h4>Estado</h4>
             <select
               name='status'
+              value={formData.selectedStatus}
+              onChange={handleChange}
               className='block w-full border border-gray-200 rounded-xl py-2 px-4 bg-white cursor-pointer'
-              value={selectedStatus}
-              onChange={(e) => setSelectedStatus(e.target.value)}
               required
             >
               {statusOptions.map((status, index) => (
@@ -95,8 +116,17 @@ export function AddDetails() {
               ))}
             </select>
           </div>
-
-          <div className='border-t p-4 md:p-6 flex'>
+          <div className='w-full px-4 md:px-6'>
+            <h4>Comentarios</h4>
+            <textarea
+              name='comments'
+              value={formData.comments}
+              onChange={handleChange}
+              className='w-full border border-gray-200 rounded-xl py-2 px-4 h-24 resize-none'
+              placeholder='Ingrese comentarios sobre la entrega'
+            />
+          </div>
+          <div className='border-t p-4 md:p-6 flex mt-2'>
             <button
               type='submit'
               className='w-full bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
