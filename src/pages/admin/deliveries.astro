@@ -1,0 +1,33 @@
+---
+import { getAuth } from 'firebase-admin/auth'
+import { app } from '../../lib/firebase/server'
+import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
+import Main from '../../components/Main.astro'
+import MainTitle from '../../components/MainTitle.astro'
+import { ListStatus } from '../../components/ListStatus'
+
+export const prerender = false
+const auth = getAuth(app)
+/* Check current session */
+if (!Astro.cookies.has('__session')) {
+  return Astro.redirect('/signin')
+}
+
+const sessionCookie = Astro.cookies.get('__session')?.value
+
+if (!sessionCookie) {
+  return Astro.redirect('/signin')
+}
+const decodedCookie = await auth.verifySessionCookie(sessionCookie)
+---
+
+<LayoutAdmin>
+  <Main
+    class='relative overflow-y-scroll bg-[url(/circle-bg.svg)] bg-no-repeat bg-cover bg-center p-4 flex flex-col gap-4 pb-16 sm:pb-6'
+  >
+    <MainTitle title='Estado de entregas' />
+    <section>
+      <ListStatus uid={decodedCookie.uid} client:load />
+    </section>
+  </Main>
+</LayoutAdmin>
