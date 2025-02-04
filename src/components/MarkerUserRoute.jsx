@@ -49,7 +49,7 @@ export function MarkerUserRoute() {
       )}
 
       {/* Markers de las rutas */}
-      {routes.map((route) => (
+      {routes?.map((route) => (
         <Marker key={route.docId} position={route.address}>
           <Popup>{route.routeName}</Popup>
         </Marker>
