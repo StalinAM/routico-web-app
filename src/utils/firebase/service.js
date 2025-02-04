@@ -119,6 +119,8 @@ export const getDriverRoutesToday = async (uidDriver) => {
 
     const routes = (await Promise.all(routesPromises)).filter(Boolean)
 
+    console.log(routes)
+
     return { routes, routeStatusList }
   } catch (e) {
     console.error('Error obteniendo rutas del conductor para hoy:', e)
@@ -168,6 +170,16 @@ export const addOrUpdateRouteStatus = async (routeStatusData) => {
     console.error('Error al agregar/actualizar el estado de la ruta:', e)
   }
 }
+
+export const updateStatusDriver = async (statusId, formData) => {
+  try {
+    const routeStatusRef = doc(db, 'routes-status', statusId)
+    await updateDoc(routeStatusRef, formData) // Solo actualiza los campos existentes
+  } catch (e) {
+    console.error('Error al actualizar el estado del conductor:', e)
+  }
+}
+
 export const deleteRouteStatus = async (driverId, routeId, date) => {
   try {
     const routesStatusRef = collection(db, 'routes-status')
@@ -189,4 +201,14 @@ export const deleteRouteStatus = async (driverId, routeId, date) => {
   } catch (error) {
     console.error('Error al eliminar route-status:', error)
   }
+}
+export const fetchStatus = async (uid) => {
+  const statusList = []
+  const q = query(collection(db, 'routes-status'), where('uidAdmin', '==', uid))
+  const querySnapshot = await getDocs(q)
+  querySnapshot.forEach((doc) => {
+    const statu = { ...doc.data(), docId: doc.id }
+    statusList.push(statu)
+  })
+  return statusList
 }
