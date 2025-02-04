@@ -18,7 +18,9 @@ if (Astro.cookies.has('__session')) {
 ---
 
 <Layout title='Crear una cuenta'>
-  <main class='grid md:grid-cols-2 justify-around items-center h-dvh'>
+  <main
+    class='grid md:grid-cols-2 items-center justify-center h-dvh md:gap-x-20'
+  >
     <img
       src='/top_background.svg'
       class='fixed top-0 md:-top-14 xl:-top-32 2xl:-top-44 w-full -z-10'
@@ -29,55 +31,57 @@ if (Astro.cookies.has('__session')) {
       class='fixed bottom-0 md:-bottom-14 xl:-bottom-40 2xl:-bottom-52 w-full -z-10'
       alt=''
     />
-    <picture class='hidden w-full h-full md:flex justify-end'>
-      <img src='/img_background.svg' class='md:max-w-xl' />
+    <picture class='w-full hidden h-full md:flex md:justify-end'>
+      <img class='w-[600px]' src='/img_background.svg' class='md:max-w-xl' />
     </picture>
-    <div
-      class='py-3 pl-3 pr-3 md:pr-40 flex justify-center items-center flex-col gap-y-2'
-    >
-      <div class='pb-6'>
-        <Logo
-          class='flex gap-2 items-center text-4xl font-bold justify-center text-azur-800 uppercase'
-        />
+    <div class='w-full md:flex md:justify-start'>
+      <div
+        class='md:p-6 flex justify-center items-center flex-col gap-y-2 rounded-xl w-fit md:border-azur-600'
+      >
+        <div class='pb-6'>
+          <Logo
+            class='flex gap-2 items-center text-4xl font-bold justify-center text-azur-800 uppercase'
+          />
+        </div>
+        <h2 class='text-4xl font-bold'>Iniciar Sesión</h2>
+        <p class='text-azur-600 font-semibold'>
+          Cambia el rumbo de tus entregas con un clic.
+        </p>
+        <section>
+          <form
+            class='flex gap-3 flex-col min-w-80'
+            method='post'
+            action='/api/auth/login'
+          >
+            <label for='email'></label>
+            <input
+              class='border-2 border-gray-200 rounded py-1 px-2'
+              type='email'
+              id='email'
+              name='email'
+              placeholder='usuario@routico.ec'
+              required
+            />
+            <label for='password'></label>
+            <input
+              class='border-2 border-gray-200 rounded py-1 px-2'
+              type='password'
+              id='password'
+              name='password'
+              placeholder='contraseña'
+              required
+            />
+            <a href='/register' class='ml-auto text-sm text-azur-600'
+              >¿Olvidaste tu contraseña?</a
+            >
+            <button
+              type='submit'
+              class='py-2 px-4 bg-azur-800 hover:bg-azur-600 rounded-xl text-azur-50 font-semibold transition-colors duration-300 ease-in-out'
+              >Continuar</button
+            >
+          </form>
+        </section>
       </div>
-      <h2 class='text-4xl font-bold'>Iniciar Sesión</h2>
-      <p class='text-azur-600 font-semibold'>
-        Cambia el rumbo de tus entregas con un clic.
-      </p>
-      <section>
-        <form
-          class='flex gap-3 flex-col min-w-80'
-          method='post'
-          action='/api/auth/login'
-        >
-          <label for='email'></label>
-          <input
-            class='border-2 border-gray-200 rounded py-1 px-2'
-            type='email'
-            id='email'
-            name='email'
-            placeholder='usuario@routico.ec'
-            required
-          />
-          <label for='password'></label>
-          <input
-            class='border-2 border-gray-200 rounded py-1 px-2'
-            type='password'
-            id='password'
-            name='password'
-            placeholder='contraseña'
-            required
-          />
-          <a href='/register' class='ml-auto text-sm text-azur-600'
-            >¿Olvidaste tu contraseña?</a
-          >
-          <button
-            type='submit'
-            class='py-2 px-4 bg-azur-600 rounded-xl text-azur-50 font-semibold'
-            >Continuar</button
-          >
-        </form>
-      </section>
     </div>
   </main>
 </Layout>
