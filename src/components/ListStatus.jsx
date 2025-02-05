@@ -83,11 +83,11 @@ export function ListStatus({ uid }) {
                           <strong>Conductor: </strong>
                           {
                             drivers.find(
-                              (drive) => drive.uidDriver === status.uidDriver
+                              (drive) => drive.docId === status.uidDriver
                             )?.name
                           }{' '}
                           {drivers.find(
-                            (drive) => drive.uidDriver === status.uidDriver
+                            (drive) => drive.docId === status.uidDriver
                           )?.lastName || 'No asignado'}
                         </p>
                         <p className='capitalize'>
