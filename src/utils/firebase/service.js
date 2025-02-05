@@ -133,13 +133,13 @@ export const addOrUpdateRouteStatus = async (routeStatusData) => {
     const routeStatusRef = collection(db, 'routes-status')
     const todayDate = getTodayDate() // Fecha del día actual
 
-    const { routeId, driverId, status, comments, details } = routeStatusData
+    const { routeId, uidDriver, status, comments, details } = routeStatusData
 
     // Verificar si ya existe un documento con el mismo routeId, driverId y fecha actual
     const q = query(
       routeStatusRef,
       where('routeId', '==', routeId),
-      where('driverId', '==', driverId),
+      where('driverId', '==', uidDriver),
       where('date', '==', todayDate)
     )
 
@@ -157,7 +157,7 @@ export const addOrUpdateRouteStatus = async (routeStatusData) => {
         ...routeStatusData,
         routeId,
         details,
-        driverId,
+        uidDriver,
         status: status || 'Pendiente', // Estado por defecto
         comments: comments || '',
         date: todayDate // Guardamos solo la fecha

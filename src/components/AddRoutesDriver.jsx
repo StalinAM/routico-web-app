@@ -91,7 +91,7 @@ export function AddRoutesDriver({ uid }) {
 
     // 🔥 4. Eliminar de Firestore las rutas que se deseleccionaron
     for (const routeId of removedRoutes) {
-      await deleteRouteStatus(driver.uidDriver, routeId, todayDate)
+      await deleteRouteStatus(driver.docId, routeId, todayDate)
     }
 
     // 🔥 5. Agregar o actualizar las rutas seleccionadas en `routes-status`
@@ -100,7 +100,7 @@ export function AddRoutesDriver({ uid }) {
         routeId,
         uidAdmin: driver.uidAdmin,
         details: details[routeId] || '',
-        driverId: driver.uidDriver,
+        uidDriver: driver.docId,
         status: 'Pendiente',
         comments: '',
         date: todayDate
