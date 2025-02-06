@@ -44,12 +44,20 @@ export function ListRoutesDriver({ uid, displayButton = true }) {
                   <PingMap />
                   <h2>{route.routeName}</h2>
                 </div>
-                <p className='text-sm text-green-500'>
+
+                <span
+                  className={`px-3 py-1 text-sm text-white rounded-full ${
+                    details.find((detail) => detail.routeId === route.docId)
+                      ?.status === 'Pendiente'
+                      ? 'bg-yellow-500'
+                      : 'bg-green-500'
+                  }`}
+                >
                   {
                     details.find((detail) => detail.routeId === route.docId)
                       ?.status
                   }
-                </p>
+                </span>
               </header>
               <h3 className='pt-2 text-sm text-gray-600'>Datos de entrega:</h3>
               <p>

@@ -113,8 +113,8 @@ export function AddDriver({ uid }) {
           isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
         }`}
       >
-        <div className='border-b p-6 flex justify-between items-center'>
-          <h3 className='text-center font-semibold text-xl'>
+        <div className='border-b py-4 px-6 flex justify-between items-center'>
+          <h3 className='text-center font-semibold md:text-lg'>
             {driver?.email ? 'Actualizar conductor' : 'Nuevo conductor'}
           </h3>
           <CloseButton
@@ -125,7 +125,10 @@ export function AddDriver({ uid }) {
             setIsClosing={setIsClosing}
           />
         </div>
-        <form onSubmit={handleSubmit} className='w-full flex flex-col gap-y-4'>
+        <form
+          onSubmit={handleSubmit}
+          className='w-full flex flex-col gap-y-4 text-sm md:text-base'
+        >
           <div className='grid grid-cols-2 gap-4 px-6'>
             <div>
               <label htmlFor='name' className='block text-gray-700'>

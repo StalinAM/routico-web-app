@@ -107,8 +107,8 @@ export function AddRoute({ uid }) {
           isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
         }`}
       >
-        <div className='border-b p-4 md:p-6 flex justify-between items-center sticky top-0 bg-azur-50 z-50'>
-          <h3 className='text-center font-semibold text-xl'>
+        <div className='border-b py-4 px-6 flex justify-between items-center sticky top-0 bg-azur-50 z-50'>
+          <h3 className='text-center font-semibold md:text-lg'>
             {route?.name ? 'Actualizar ruta' : 'Nueva ruta'}
           </h3>
           <CloseButton
@@ -121,13 +121,10 @@ export function AddRoute({ uid }) {
         </div>
         <form
           onSubmit={handleSubmit}
-          className='w-full flex flex-col gap-y-2 md:gap-y-4'
+          className='w-full flex flex-col gap-y-2 md:gap-y-4 text-sm md:text-base'
         >
           <div className='w-full px-4 md:px-6'>
-            <label
-              htmlFor='routeName'
-              className='block text-gray-700 text-sm md:text-base '
-            >
+            <label htmlFor='routeName' className='block text-gray-700  '>
               Nombre Ruta
               <input
                 type='text'
@@ -140,10 +137,7 @@ export function AddRoute({ uid }) {
             </label>
           </div>
           <div className='w-full px-4 md:px-6'>
-            <label
-              htmlFor='name'
-              className='block text-gray-700 text-sm md:text-base '
-            >
+            <label htmlFor='name' className='block text-gray-700  '>
               Nombre Cliente
               <input
                 type='text'
@@ -157,7 +151,7 @@ export function AddRoute({ uid }) {
           </div>
           <label
             htmlFor='phoneNumber'
-            className='text-gray-700 px-4 md:px-6 text-sm md:text-base  '
+            className='text-gray-700 px-4 md:px-6   '
           >
             Teléfono
             <input
@@ -171,7 +165,7 @@ export function AddRoute({ uid }) {
             />
           </label>
           <div className='px-4 md:px-6 flex flex-col'>
-            <p className='text-sm md:text-base text-gray-700'>Dirección</p>
+            <p className=' text-gray-700'>Dirección</p>
             <div className='w-full h-48 rounded-xl overflow-hidden z-10'>
               <MarkersMap
                 showMain={false}
@@ -180,9 +174,7 @@ export function AddRoute({ uid }) {
             </div>
           </div>
           <div className='px-4 md:px-6 flex flex-col'>
-            <p className='text-sm md:text-base text-gray-700'>
-              Puntos de referencia
-            </p>
+            <p className=' text-gray-700'>Puntos de referencia</p>
             <div className='w-full h-48 rounded-xl overflow-hidden z-10'>
               <MarkerMapLimit setWaypoints={handleSetWaypoints} />
             </div>

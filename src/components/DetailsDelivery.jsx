@@ -21,7 +21,7 @@ export function DetailsDelivery() {
         }`}
       >
         <div className='border-b p-4 md:p-6 flex justify-between items-center sticky top-0 bg-azur-50 z-50'>
-          <h3 className='text-center font-semibold text-xl'>
+          <h3 className='text-center font-semibold text-lg'>
             Detalles de la entrega
           </h3>
           <CloseButton
@@ -30,7 +30,7 @@ export function DetailsDelivery() {
             setIsClosing={setIsClosing}
           />
         </div>
-        <section className='px-4 md:px-6 pb-4 md:pb-6'>
+        <section className='px-4 pb-4 md:px-6 md:pb-6 flex flex-col gap-2'>
           <p>
             <strong>Estado de entrega: </strong>
             {detailRoute.status}

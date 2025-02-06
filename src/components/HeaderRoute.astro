@@ -17,13 +17,13 @@ const decodedCookie = await auth.verifySessionCookie(sessionCookie)
 ---
 
 <header
-  class='flex items-center justify-between py-3 px-6 [&_svg]:w-8 row-start-1 col-start-1 col-end-4 border-b border-azur-300'
+  class='flex items-center justify-between py-3 px-4 md:px-6 [&_svg]:w-8 row-start-1 col-start-1 col-end-4 border-b border-azur-300'
 >
   <Logo
     class='flex gap-1 items-center text-xl font-bold justify-center text-azur-800'
   />
   <div class='flex items-center gap-x-2'>
-    <h1 class='capitalize font-bold text-lg'>{decodedCookie.name}</h1>
+    <h1 class='capitalize font-bold'>{decodedCookie.name}</h1>
     <form action='/api/auth/logout'>
       <button
         class='flex gap-1 items-center hover:bg-azur-800 hover:text-azur-50 rounded-xl px-2 py-1 [&_svg]:w-5 hover:scale-105 ease-in-out transition-all duration-300 border'
