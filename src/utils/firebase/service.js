@@ -93,7 +93,7 @@ export const getDriverRoutesToday = async (uidDriver) => {
     const routesStatusRef = collection(db, 'routes-status')
     const statusQuery = query(
       routesStatusRef,
-      where('driverId', '==', uidDriver),
+      where('uidDriver', '==', uidDriver),
       where('date', '==', todayDate)
     )
 
