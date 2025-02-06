@@ -3,6 +3,7 @@ import { useRouteStore } from '../store/useRouteStore'
 import { CloseButton } from './CloseButton'
 import { useAuthStore } from '../store/useAuthStore'
 import { updateStatusDriver } from '../utils/firebase/service'
+import { toast } from 'sonner'
 
 export function AddDetails() {
   const { setOpenModal, openModal } = useAuthStore()
@@ -34,13 +35,27 @@ export function AddDetails() {
     try {
       // Llamar a la función para actualizar los datos del documento
       await updateStatusDriver(detailRoute.docId, formData)
+      toast.success('Estado actualizado correctamente')
 
       console.log('Estado del conductor actualizado correctamente')
     } catch (error) {
       console.error('Error al actualizar el estado del conductor:', error)
     }
+    setFormData({
+      selectedPay: '',
+      status: 'Pendiente',
+      amount: '',
+      comments: ''
+    })
+    closeModal()
   }
-
+  const closeModal = () => {
+    setIsClosing(true)
+    setTimeout(() => {
+      setOpenModal(false)
+      setIsClosing(false)
+    }, 400) // Tiempo de la animación
+  }
   if (!openModal) return null
 
   return (
@@ -55,9 +70,7 @@ export function AddDetails() {
         }`}
       >
         <div className='border-b p-4 md:p-6 flex justify-between items-center sticky top-0 bg-azur-50 z-50'>
-          <h3 className='text-center font-semibold text-xl'>
-            Detalles de la entrega
-          </h3>
+          <h3 className='text-center font-semibold'>Detalles de la entrega</h3>
           <CloseButton
             data={route}
             setOpenModal={setOpenModal}
@@ -66,7 +79,7 @@ export function AddDetails() {
         </div>
         <form
           onSubmit={handleSubmit}
-          className='w-full flex flex-col gap-y-2 md:gap-y-4'
+          className='w-full flex flex-col gap-y-2 md:gap-y-4 text-sm'
         >
           <div className='w-full px-4 md:px-6'>
             <h4>Tipo de pago</h4>
