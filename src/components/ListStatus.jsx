@@ -83,11 +83,11 @@ export function ListStatus({ uid }) {
                           <strong>Conductor: </strong>
                           {
                             drivers.find(
-                              (drive) => drive.docId === status.uidDriver
+                              (drive) => drive.uidDriver === status.uidDriver
                             )?.name
                           }{' '}
                           {drivers.find(
-                            (drive) => drive.docId === status.uidDriver
+                            (drive) => drive.uidDriver === status.uidDriver
                           )?.lastName || 'No asignado'}
                         </p>
                         <p className='capitalize'>
@@ -101,8 +101,6 @@ export function ListStatus({ uid }) {
                         className={`px-3 py-1 text-sm text-white rounded-full ${
                           status.status === 'Pendiente'
                             ? 'bg-yellow-500'
-                            : status.status === 'En camino'
-                            ? 'bg-blue-500'
                             : 'bg-green-500'
                         }`}
                       >
