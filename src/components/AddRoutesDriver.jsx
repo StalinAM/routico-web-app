@@ -100,18 +100,21 @@ export function AddRoutesDriver({ uid }) {
         routeId,
         uidAdmin: driver.uidAdmin,
         details: details[routeId] || '',
-        uidDriver: driver.docId,
+        uidDriver: driver.uidDriver,
+        driverId: driver.docId,
         status: 'Pendiente',
         comments: '',
         date: todayDate
       }
+      console.log(routeStatusData)
+
       await addOrUpdateRouteStatus(routeStatusData)
+      toast.success(`Rutas actualizadas correctamente para ${driver.name}`)
     }
 
     // 🔥 6. Actualizar la lista de conductores
     fetchdrivers(uid)
 
-    toast.success(`Rutas actualizadas correctamente para ${driver.name}`)
     closeModal()
   }
 
@@ -136,8 +139,8 @@ export function AddRoutesDriver({ uid }) {
           isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
         }`}
       >
-        <div className='border-b p-6 flex justify-between items-center sticky top-0 bg-azur-50'>
-          <h3 className='text-center font-semibold text-xl'>
+        <div className='border-b px-6 py-4 flex justify-between items-center sticky top-0 bg-azur-50'>
+          <h3 className='text-center font-semibold text-lg'>
             Agregar Rutas a {driver.name}
           </h3>
           <CloseButton
