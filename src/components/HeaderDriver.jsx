@@ -4,14 +4,53 @@ import { useAuthStore } from '../store/useAuthStore'
 import { CheckRoute, DetailsRoute } from './icons/Icons'
 
 export function HeaderDriver() {
-  const [deliver, setDeliver] = useState(false)
   const { route } = useRouteStore()
   const { setOpenModal, setOpenModalRoutes } = useAuthStore()
   return (
-    <header className='flex justify-between items-center'>
-      <div className='border rounded-xl py-2 px-4'>
-        <h1 className='text-lg font-bold'>{route.routeName}</h1>
-        <p className='flex gap-1 items-center hover:scale-105 ease-in-out transition-all duration-300'>
+    <header className='flex flex-col gap-y-2'>
+      <div className='flex justify-between items-center'>
+        <a
+          className='flex gap-2 items-center border rounded-xl py-1 px-2 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
+          href='/drivers'
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='2'
+            stroke-linecap='round'
+            stroke-linejoin='round'
+            class='icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-left'
+          >
+            <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+            <path d='M5 12l14 0' />
+            <path d='M5 12l4 4' />
+            <path d='M5 12l4 -4' />
+          </svg>
+        </a>
+        <div className='flex gap-4'>
+          <button
+            onClick={() => setOpenModalRoutes(true)}
+            className='flex gap-2 items-center bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
+          >
+            <DetailsRoute />
+            <span className='hidden md:block'>Detalles</span>
+          </button>
+          <button
+            onClick={() => setOpenModal(true)}
+            className='flex gap-2 items-center bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
+          >
+            <CheckRoute />
+            <span className='hidden md:block'>Entrega</span>
+          </button>
+        </div>
+      </div>
+      <div className='border rounded-xl py-1 px-3'>
+        <h2 className='text-lg font-bold'>{route.routeName}</h2>
+        <p className='flex gap-1 items-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='20'
@@ -29,22 +68,6 @@ export function HeaderDriver() {
           </svg>
           <span className='text-sm'>{route.phoneNumber}</span>
         </p>
-      </div>
-      <div className='flex gap-4'>
-        <button
-          onClick={() => setOpenModalRoutes(true)}
-          className='flex gap-2 items-center bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
-        >
-          <DetailsRoute />
-          <span className='hidden md:block'>Detalles</span>
-        </button>
-        <button
-          onClick={() => setOpenModal(true)}
-          className='flex gap-2 items-center bg-azur-800 text-azur-50/90 rounded-xl py-2 px-4 hover:bg-azur-600 hover:text-azur-50 transition-colors duration-300 ease-in-out'
-        >
-          <CheckRoute />
-          <span className='hidden md:block'>Entrega</span>
-        </button>
       </div>
     </header>
   )
