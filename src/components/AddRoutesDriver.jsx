@@ -61,8 +61,11 @@ export function AddRoutesDriver({ uid }) {
     setDetails((prev) => ({ ...prev, [routeId]: value }))
   }
   const getTodayDate = () => {
-    const today = new Date()
-    return today.toISOString().split('T')[0] // Formato "YYYY-MM-DD"
+    const now = new Date()
+    const ecuadorTime = new Date(
+      now.toLocaleString('en-US', { timeZone: 'America/Guayaquil' })
+    )
+    return ecuadorTime.toISOString().split('T')[0] // Formato "YYYY-MM-DD"
   }
 
   const handleSubmit = async (e) => {
