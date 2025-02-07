@@ -34,6 +34,7 @@ if (user.email?.match(/@routico.ec/)) {
     >
       <Count uid={decodedCookie.uid} data='conductores' client:load />
       <Count uid={decodedCookie.uid} data='rutas' client:load />
+      <Count uid={decodedCookie.uid} data='ingresos' client:load />
     </section>
     <section class='rounded-xl overflow-hidden'>
       <MarkersMap client:only />
