@@ -1,30 +1,14 @@
 export default function SignoutBtn({ main }) {
   async function signout() {
-    try {
-      const res = await fetch('/api/auth/logout', { method: 'GET' })
-
-      if (!res.ok) {
-        try {
-          const data = await res.json()
-          console.error('Error al cerrar sesión:', data)
-        } catch (error) {
-          console.error('Error al procesar la respuesta de logout:', error)
-        }
-        return
-      }
-
-      // Redirección si el backend la devuelve
-      if (res.redirected) {
-        window.location.assign(res.url)
-      } else {
-        // Redirección manual si la respuesta no es automática
-        window.location.href = '/signin'
-      }
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error)
+    const res = await fetch('/api/auth/logout')
+    if (!res.ok) {
+      const data = await res.json()
+      return data
+    }
+    if (res.redirected) {
+      window.location.assign(res.url)
     }
   }
-  console.log(typeof main)
 
   return (
     <button
