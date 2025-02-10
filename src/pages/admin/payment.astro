@@ -7,11 +7,11 @@ import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
 
 export const prerender = false
 /* Check current session */
-if (!Astro.cookies.has('__session')) {
+if (!Astro.cookies.has('session')) {
   return Astro.redirect('/signin')
 }
 
-const sessionCookie = Astro.cookies.get('__session')?.value
+const sessionCookie = Astro.cookies.get('session')?.value
 
 if (!sessionCookie) {
   return Astro.redirect('/signin')

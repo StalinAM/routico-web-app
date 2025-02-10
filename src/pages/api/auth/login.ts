@@ -24,11 +24,8 @@ export const GET: APIRoute = async ({ request, cookies, redirect }) => {
     })
 
     /* Guardar la cookie */
-    cookies.set('__session', sessionCookie, {
-      path: '/',
-      secure: true, // Necesario para HTTPS
-      httpOnly: true, // No accesible desde JavaScript
-      sameSite: 'lax' // Evita problemas de envío de cookies
+    cookies.set('session', sessionCookie, {
+      path: '/'
     })
 
     /* Verificar la cookie y obtener el usuario */
