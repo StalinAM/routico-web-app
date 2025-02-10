@@ -1,7 +1,7 @@
 export default function SignoutBtn({ main }) {
   async function signout() {
     try {
-      const res = await fetch('/api/auth/logout', {
+      const res = await fetch('/api/auth/signout', {
         method: 'GET',
         cache: 'no-store' // Asegurar que no se use caché
       })
@@ -12,7 +12,7 @@ export default function SignoutBtn({ main }) {
       }
 
       // Redirigir manualmente a /signin
-      window.location.href = '/signin'
+      window.location.href = '/admin'
     } catch (error) {
       console.error('Error en logout:', error)
     }
