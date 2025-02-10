@@ -8,7 +8,7 @@ import Logo from './Logo.astro'
   <Logo
     class='flex gap-1 items-center text-xl font-bold justify-center text-azur-800'
   />
-  <form action='/api/auth/logout'>
+  <form action='/api/auth/logout' method='GET'>
     <button
       class='flex gap-1 border items-center hover:bg-azur-800 hover:text-azur-50 rounded-lg px-3 py-1 [&_svg]:w-5 hover:scale-105 ease-in-out transition-all duration-300'
       type='submit'
