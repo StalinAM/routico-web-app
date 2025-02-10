@@ -11,9 +11,7 @@ import SignoutBtn from './SignoutBtn'
     class='flex gap-1 items-center text-xl font-bold justify-center text-azur-800'
   />
 
-  <form action='/api/auth/logout' method='GET'>
-    <button type='submit'> Salir </button>
-  </form>
+  <SignoutBtn client:idle main='active' />
 </header>
 <Sidebar />
 <slot />
