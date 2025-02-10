@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro'
+import Sidebar from './Sidebar.astro'
 import SignoutBtn from './SignoutBtn'
 ---
 
@@ -12,3 +13,5 @@ import SignoutBtn from './SignoutBtn'
 
   <SignoutBtn client:idle main='active' />
 </header>
+<Sidebar />
+<slot />

@@ -6,6 +6,7 @@ import { getAuth } from 'firebase-admin/auth'
 import { app } from '../../lib/firebase/server'
 import { ListRoutes } from '../../components/ListRoutes'
 import { WrapperRoutes } from '../../components/WrapperRoutes'
+import Header from '../../components/Header.astro'
 
 const auth = getAuth(app)
 export const prerender = false
@@ -23,15 +24,16 @@ const decodedCookie = await auth.verifySessionCookie(sessionCookie)
 ---
 
 <LayoutAdmin>
-  <Main
-    class='relative overflow-y-scroll bg-[url(/circle-bg.svg)] bg-no-repeat bg-cover bg-center p-4 flex flex-col gap-4 pb-16 sm:pb-6'
-  >
-    <MainTitle title='Lista de rutas' />
+  <Header>
+    <Main
+      class='relative overflow-y-scroll bg-[url(/circle-bg.svg)] bg-no-repeat bg-cover bg-center p-4 flex flex-col gap-4 pb-16 sm:pb-6'
+    >
+      <MainTitle title='Lista de rutas' />
 
-    <WrapperRoutes uid={decodedCookie.uid} client:only />
-    <section>
-      <ListRoutes simple={true} uid={decodedCookie.uid} client:load />
-    </section>
-  </Main>
+      <WrapperRoutes uid={decodedCookie.uid} client:only />
+      <section>
+        <ListRoutes simple={true} uid={decodedCookie.uid} client:load />
+      </section>
+    </Main>
+  </Header>
 </LayoutAdmin>
-<script></script>

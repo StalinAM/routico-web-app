@@ -6,6 +6,8 @@ import { app } from '../../lib/firebase/server'
 import { ListRoutes } from '../../components/ListRoutes'
 import { MarkersMap } from '../../components/MarkersMap'
 import { Count } from '../../components/Count'
+import Header from '../../components/Header.astro'
+import Sidebar from '../../components/Sidebar.astro'
 export const prerender = false
 const auth = getAuth(app)
 /* Check current session */
@@ -26,25 +28,27 @@ if (user.email?.match(/@routico.ec/)) {
 ---
 
 <LayoutAdmin>
-  <Main
-    class='relative max-h-[calc(100dvh-52px)] bg-[url(/circle-bg.svg)] bg-no-repeat bg-cover bg-center p-4 md:p-6 grid grid-rows-[80px_auto_200px] lg:grid-rows-[100px_auto] lg:grid-cols-[1fr_320px] gap-4 md:gap-6 pb-16 sm:pb-6'
-  >
-    <section
-      class='bg-azur-50 rounded-xl border lg:col-start-1 flex-row lg:col-end-3 px-4 py-2 lg:p-4 flex gap-6 lg:justify-around overflow-x-auto'
+  <Header>
+    <Main
+      class='relative max-h-[calc(100dvh-52px)] bg-[url(/circle-bg.svg)] bg-no-repeat bg-cover bg-center p-4 md:p-6 grid grid-rows-[80px_auto_200px] lg:grid-rows-[100px_auto] lg:grid-cols-[1fr_320px] gap-4 md:gap-6 pb-16 sm:pb-6'
     >
-      <Count uid={decodedCookie.uid} data='conductores' client:load />
-      <Count uid={decodedCookie.uid} data='rutas' client:load />
-      <Count uid={decodedCookie.uid} data='ingresos' client:load />
-    </section>
-    <section class='rounded-xl overflow-hidden'>
-      <MarkersMap client:only />
-    </section>
-    <section class='overflow-hidden bg-azur-50 p-4 rounded-xl border'>
-      <ul
-        class='overflow-y-auto max-h-full h-auto grid grid-cols-[repeat(auto-fit,minmax(250px,300px))] gap-2 justify-center'
+      <section
+        class='bg-azur-50 rounded-xl border lg:col-start-1 flex-row lg:col-end-3 px-4 py-2 lg:p-4 flex gap-6 lg:justify-around overflow-x-auto'
       >
-        <ListRoutes simple={false} uid={decodedCookie.uid} client:load />
-      </ul>
-    </section>
-  </Main>
+        <Count uid={decodedCookie.uid} data='conductores' client:load />
+        <Count uid={decodedCookie.uid} data='rutas' client:load />
+        <Count uid={decodedCookie.uid} data='ingresos' client:load />
+      </section>
+      <section class='rounded-xl overflow-hidden'>
+        <MarkersMap client:only />
+      </section>
+      <section class='overflow-hidden bg-azur-50 p-4 rounded-xl border'>
+        <ul
+          class='overflow-y-auto max-h-full h-auto grid grid-cols-[repeat(auto-fit,minmax(250px,300px))] gap-2 justify-center'
+        >
+          <ListRoutes simple={false} uid={decodedCookie.uid} client:load />
+        </ul>
+      </section>
+    </Main>
+  </Header>
 </LayoutAdmin>
