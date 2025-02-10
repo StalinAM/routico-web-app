@@ -1,6 +1,25 @@
 import { useEffect, useState } from 'react'
 import { Marker, Popup, useMapEvents } from 'react-leaflet'
-
+const redIcon = new L.Icon({
+  iconUrl:
+    'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+  shadowUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  iconSize: [25, 41], // Tamaño del ícono
+  iconAnchor: [12, 41], // Punto de anclaje
+  popupAnchor: [1, -34], // Punto de apertura del popup
+  shadowSize: [41, 41]
+})
+const blueIcon = new L.Icon({
+  iconUrl:
+    'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+  shadowUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  iconSize: [25, 41], // Tamaño del ícono
+  iconAnchor: [12, 41], // Punto de anclaje
+  popupAnchor: [1, -34], // Punto de apertura del popup
+  shadowSize: [41, 41]
+})
 export function LocateUser({ setCoordinates, address }) {
   const [currentPosition, setCurrentPosition] = useState(null) // Ubicación inicial
   const [selectedPosition, setSelectedPosition] = useState(null) // Ubicación seleccionada
@@ -63,7 +82,7 @@ export function LocateUser({ setCoordinates, address }) {
     <>
       {/* Marcador para la ubicación inicial */}
       {currentPosition && !selectedPosition && (
-        <Marker position={currentPosition}>
+        <Marker position={currentPosition} icon={redIcon}>
           <Popup>
             Estás aquí: <br />
             Latitud: {currentPosition[0]} <br />
@@ -74,7 +93,7 @@ export function LocateUser({ setCoordinates, address }) {
 
       {/* Marcador para la ubicación seleccionada */}
       {selectedPosition && (
-        <Marker position={selectedPosition}>
+        <Marker position={selectedPosition} icon={blueIcon}>
           <Popup>
             Ubicación seleccionada: <br />
             Latitud: {selectedPosition.lat} <br />
