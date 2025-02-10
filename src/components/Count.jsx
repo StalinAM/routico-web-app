@@ -71,7 +71,7 @@ export function Count({ data, uid }) {
             <path d='M16 15l0 .01'></path>
           </svg>
         </div>
-        <div>
+        <div className='flex flex-col items-start'>
           <h2 className='text-gray-500 text-center text-sm md:text-base capitalize'>
             {data}
           </h2>
@@ -104,7 +104,7 @@ export function Count({ data, uid }) {
             <path d='M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z'></path>
           </svg>
         </div>
-        <div>
+        <div className='flex flex-col items-start'>
           <h2 className='text-gray-500 text-center text-sm md:text-base capitalize'>
             {data}
           </h2>
@@ -131,13 +131,13 @@ export function Count({ data, uid }) {
             strokeLinecap='round'
             strokeLinejoin='round'
           >
-            <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
-            <path d='M9 10a3 3 0 1 0 6 0a3 3 0 0 0 -6 0'></path>
-            <path d='M6 21v-1a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v1'></path>
-            <path d='M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z'></path>
+            <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+            <path d='M7 9m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z' />
+            <path d='M14 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0' />
+            <path d='M17 9v-2a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h2' />
           </svg>
         </div>
-        <div>
+        <div className='flex flex-col items-start'>
           <h2 className='text-gray-500 text-center text-sm md:text-base capitalize'>
             {data}
           </h2>
