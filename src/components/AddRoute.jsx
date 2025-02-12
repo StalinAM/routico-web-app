@@ -103,7 +103,7 @@ export function AddRoute({ uid }) {
       }`}
     >
       <div
-        className={`bg-azur-50 overflow-y-scroll rounded-xl w-full max-w-xs md:max-w-sm lg:max-w-md max-h-[80%] flex flex-col gap-y-4 ${
+        className={`bg-azur-50 overflow-y-scroll rounded-xl w-full max-w-xs md:max-w-sm lg:max-w-xl max-h-[80%] flex flex-col gap-y-4 ${
           isClosing ? 'animate-scale-down-center' : 'animate-scale-up-center'
         }`}
       >
@@ -166,7 +166,7 @@ export function AddRoute({ uid }) {
           </label>
           <div className='px-4 md:px-6 flex flex-col'>
             <p className=' text-gray-700'>Dirección</p>
-            <div className='w-full h-48 rounded-xl overflow-hidden z-10'>
+            <div className='w-full h-48 lg:h-56 rounded-xl overflow-hidden z-10'>
               <MarkersMap
                 showMain={false}
                 setCoordinates={handleSetCoordinates}
@@ -175,7 +175,7 @@ export function AddRoute({ uid }) {
           </div>
           <div className='px-4 md:px-6 flex flex-col'>
             <p className=' text-gray-700'>Puntos de referencia</p>
-            <div className='w-full h-48 rounded-xl overflow-hidden z-10'>
+            <div className='w-full h-48 lg:h-56 rounded-xl overflow-hidden z-10'>
               <MarkerMapLimit setWaypoints={handleSetWaypoints} />
             </div>
           </div>
