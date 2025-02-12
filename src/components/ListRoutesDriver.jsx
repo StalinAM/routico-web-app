@@ -39,7 +39,7 @@ export function ListRoutesDriver({ uid, displayButton = true }) {
         <li key={route.docId}>
           <article className='flex bg-azur-50 justify-between items-center p-4 border-2 border-azur-800 rounded-lg bg-azur-200/20'>
             <div className='w-full pr-4'>
-              <header className='pb-2 border-b-2 flex intems center justify-between'>
+              <header className='pb-2 border-b-2 flex items-center justify-between'>
                 <div className='flex gap-x-2 items-center text-lg font-bold'>
                   <PingMap />
                   <h2>{route.routeName}</h2>
