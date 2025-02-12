@@ -51,7 +51,7 @@ export function Count({ data, uid }) {
   if (data === 'rutas') {
     return (
       <div className='flex items-center gap-x-4'>
-        <div className='rounded-full bg-azur-400 p-2 lg::p-3 text-azur-800'>
+        <div className='rounded-full border  p-2 lg::p-3 text-azur-800'>
           <svg
             className='w-8 h-8 md:w-10 md:h-10'
             xmlns='http://www.w3.org/2000/svg'
@@ -85,7 +85,7 @@ export function Count({ data, uid }) {
   if (data === 'conductores') {
     return (
       <div className='flex items-center gap-x-4'>
-        <div className='rounded-full bg-azur-400 p-2 lg:p-3 text-azur-800'>
+        <div className='rounded-full border  p-2 lg:p-3 text-azur-800'>
           <svg
             className='w-8 h-8 md:w-10 md:h-10'
             xmlns='http://www.w3.org/2000/svg'
@@ -118,7 +118,7 @@ export function Count({ data, uid }) {
   if (data === 'ingresos') {
     return (
       <div className='flex items-center gap-x-4'>
-        <div className='rounded-full bg-azur-400 p-2 lg:p-3 text-azur-800'>
+        <div className='rounded-full border  p-2 lg:p-3 text-azur-800'>
           <svg
             className='w-8 h-8 md:w-10 md:h-10'
             xmlns='http://www.w3.org/2000/svg'
