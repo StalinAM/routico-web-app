@@ -1,0 +1,21 @@
+---
+import Arrow from '../icons/Arrow.astro'
+import Logo from '../Logo.astro'
+---
+
+<Logo
+  class='flex gap-x-2 text-5xl font-bold text-azur-800 [&>svg]:w-20 md:mt-12'
+/>
+<p class='text-5xl font-bold text-center'>Gestión Logística Simplificada</p>
+<p class='text-center text-lg text-gray-600 max-w-[70ch]'>
+  Administra conductores, rutas y entregas de manera eficiente. La solución
+  perfecta para pequeñas y medianas empresas.
+</p>
+<a
+  href='/drivers'
+  class='px-4 py-2 text-lg flex items-center gap-2 cursor-pointer transition-colors group ease-in-out duration-300 bg-azur-800 hover:bg-azur-600 rounded-md p-1 text-azur-50'
+>
+  <span>Comenzar</span><Arrow
+    class='group-hover:translate-x-1 transition-transform ease-in-out duration-300'
+  />
+</a>

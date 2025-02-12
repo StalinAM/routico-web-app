@@ -1,0 +1,9 @@
+---
+const props = Astro.props
+---
+
+<article class='flex flex-col gap-3 p-4 border rounded-xl h-full'>
+  <slot />
+  <h2 class='text-lg font-semibold'>{props.title}</h2>
+  <p class='text-gray-700'>{props.description}</p>
+</article>

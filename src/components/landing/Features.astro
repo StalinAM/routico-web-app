@@ -1,0 +1,39 @@
+---
+import Users from '../icons/Users.astro'
+import Maps from '../icons/Maps.astro'
+import Delivered from '../icons/Delivered.astro'
+import CardFeature from './CardFeature.astro'
+const features = [
+  {
+    title: 'Gestión de Conductores',
+    description:
+      'Administra fácilmente la rotación de conductores y mantén un registro actualizado del personal.',
+    icon: Maps
+  },
+  {
+    title: 'Control de Rutas',
+    description:
+      'Optimiza las rutas de entrega y mejora la eficiencia de tu logística.',
+    icon: Users
+  },
+  {
+    title: 'Seguimiento de Entregas',
+    description:
+      'Mantén un registro de las entregas realizadas y pendientes de cada conductor.',
+    icon: Delivered
+  }
+]
+---
+
+<h3 class='font-bold text-3xl'>Características Principales</h3>
+<ul class='grid grid-cols-1 md:grid-cols-3 gap-8 mt-5'>
+  {
+    features?.map((feature) => (
+      <li>
+        <CardFeature title={feature.title} description={feature.description}>
+          <feature.icon class='w-10 h-10 text-azur-800' />
+        </CardFeature>
+      </li>
+    ))
+  }
+</ul>
