@@ -9,16 +9,16 @@ const RoutineMachine = ({ waypoints }) => {
 
   useEffect(() => {
     if (!map) return
-
+    if (!waypoints || waypoints.length < 2) return
     const routingControl = L.Routing.control({
       waypoints: waypoints.map((wp) => L.latLng(wp[0], wp[1])),
       lineOptions: {
         styles: [{ color: '#6FA1EC', weight: 4 }]
       },
       routeWhileDragging: true,
-      show: true,
+      show: false,
       addWaypoints: false,
-      draggableWaypoints: true,
+      draggableWaypoints: false,
       fitSelectedRoutes: true,
       showAlternatives: false
     }).addTo(map)
