@@ -1,24 +1,89 @@
 ---
 import Header from '../../components/Header.astro'
+import Main from '../../components/Main.astro'
+import MainTitle from '../../components/MainTitle.astro'
 import LayoutAdmin from '../../layouts/LayoutAdmin.astro'
-import * as greatPost from '../posts/great-post.md'
-const posts = Object.values(import.meta.glob('../posts/*.md', { eager: true }))
+import adminImg from '../../assets/admin.webp'
+import driversImg from '../../assets/drivers.webp'
+import deliveriesImg from '../../assets/deliveries.webp'
+import routesImg from '../../assets/routes.webp'
 ---
 
 <LayoutAdmin>
-  <Header>
-    <p>{greatPost.frontmatter.title}</p>
-    <p>Written by: {greatPost.frontmatter.author}</p>
+  <Header />
+  <Main
+    class='relative overflow-y-scroll bg-[url(/circle-bg.svg)] bg-no-repeat bg-cover bg-center p-4 flex flex-col gap-4 pb-16 sm:pb-6'
+  >
+    <MainTitle title='Guía de usuario' />
+    <section class='max-w-[80ch] mx-auto flex flex-col gap-4'>
+      <h3 class='font-bold text-lg'>Panel Administrativo</h3>
+      <picture
+        class='max-w-screen-lg h-auto block border rounded-xl overflow-hidden shadow-md'
+      >
+        <img class='w-full' src={adminImg.src} alt='' />
+      </picture>
+      <p>
+        En el panel administrativo podrás gestionar los conductores, vehículos y
+        rutas de la aplicación.
+      </p>
+      <p>
+        Al lado izquierdo encontrarás el menú de navegación, donde podrás
+        agregar conductores, rutas, gestionar estado de las entregas, planes de
+        pago y más.
+      </p>
+      <h3 class='font-bold text-lg'>Panel Rutas</h3>
+      <picture
+        class='max-w-screen-lg h-auto block border rounded-xl overflow-hidden shadow-md'
+      >
+        <img class='w-full' src={routesImg.src} alt='' />
+      </picture>
+      <ol class='list-decimal ml-6 flex flex-col gap-2'>
+        <li>Agregar nueva ruta del cliente</li>
+        <li>Editar datos del cliente</li>
+        <li>Busqueda por nombre de la ruta</li>
+      </ol>
+      <h3 class='font-bold text-lg'>Panel Conductores</h3>
+      <picture
+        class='max-w-screen-lg h-auto block border rounded-xl overflow-hidden shadow-md'
+      >
+        <img class='w-full' src={driversImg.src} alt='' />
+      </picture>
+      <ol class='list-decimal ml-6 flex flex-col gap-2'>
+        <li>Agregar nuevo conductor</li>
+        <li>Eliminar todas las rutas asignadas a los conductores</li>
+        <li>Agregar una ruta al conductor</li>
+        <li>Editar datos del conductor</li>
+        <li>Busqueda por nombre del conductor</li>
+        <li>Mostrar u ocultar contraseña de las credenciales del conductor</li>
+      </ol>
 
-    <p>Post Archive:</p>
-    <ul>
-      {
-        posts.map((post) => (
-          <li>
-            <a href={post.url}>{post.frontmatter.title}</a>
-          </li>
-        ))
-      }
-    </ul>
-  </Header>
+      <h3 class='font-bold text-lg'>Panel Estado de entregas</h3>
+      <picture
+        class='max-w-screen-lg h-auto block border rounded-xl overflow-hidden shadow-md'
+      >
+        <img class='w-full' src={deliveriesImg.src} alt='' />
+      </picture>
+      <p>
+        Las entregas están organizadas por fecha, con la más reciente en la
+        parte superior. Cada tarjeta de entrega contiene la siguiente
+        información:
+      </p>
+      <ul class='list-disc flex flex-col gap-2 ml-6'>
+        <li><strong>Conductor: </strong>Nombre del conductor asignado.</li>
+        <li><strong>Ruta: </strong>Destino de la entrega.</li>
+        <li>
+          <strong>Tipo de pago: </strong>Método de pago utilizado (Efectivo o
+          Transferencia).
+        </li>
+        <li><strong>Monto: </strong>Valor total de la entrega.</li>
+        <li>
+          <strong>Detalles: </strong>Cantidad de paquetes/productos entregados.
+        </li>
+        <li><strong>Comentarios: </strong>Observaciones adicionales.</li>
+        <li>
+          <strong>Estado: </strong>Se indica con una etiqueta verde "Entregado".
+        </li>
+      </ul>
+    </section>
+  </Main>
 </LayoutAdmin>
