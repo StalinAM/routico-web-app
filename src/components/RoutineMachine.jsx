@@ -27,7 +27,7 @@ const RoutineMachine = ({ waypoints }) => {
         styles: [{ color: '#6FA1EC', weight: 4 }]
       },
       routeWhileDragging: true,
-      show: false,
+      show: true,
       addWaypoints: false,
       draggableWaypoints: false,
       fitSelectedRoutes: true,
