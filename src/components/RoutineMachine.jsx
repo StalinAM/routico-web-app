@@ -32,8 +32,10 @@ const RoutineMachine = ({ waypoints }) => {
       draggableWaypoints: false,
       fitSelectedRoutes: true,
       showAlternatives: false,
-      createMarker: (waypoint) => {
-        return L.marker(waypoint.latLng, { icon: blueIcon })
+      createMarker: function (i, waypoint, n) {
+        return L.marker(waypoint.latLng, {
+          icon: blueIcon
+        })
       }
     }).addTo(map)
 
