@@ -8,8 +8,8 @@ import { toast } from 'sonner'
 export function AddDetails() {
   const { setOpenModal, openModal } = useAuthStore()
   const { route, detailRoute } = useRouteStore()
-  const methodsPayment = ['Efectivo', 'Tarjeta de crédito', 'No pago']
-  const statusOptions = ['Pendiente', 'En camino', 'Entregado']
+  const methodsPayment = ['Efectivo', 'Transferencia', 'No pago']
+  const statusOptions = ['Pendiente', 'Entregado']
 
   const [formData, setFormData] = useState({
     selectedPay: '',
