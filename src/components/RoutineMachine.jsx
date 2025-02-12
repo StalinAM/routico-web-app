@@ -4,6 +4,17 @@ import L from 'leaflet'
 import 'leaflet-routing-machine'
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 
+const blueIcon = new L.Icon({
+  iconUrl:
+    'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+  shadowUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  iconSize: [25, 41], // Tamaño del ícono
+  iconAnchor: [12, 41], // Punto de anclaje
+  popupAnchor: [1, -34], // Punto de apertura del popup
+  shadowSize: [41, 41]
+})
+
 const RoutineMachine = ({ waypoints }) => {
   const map = useMap() // Obtener instancia del mapa
 
@@ -20,7 +31,10 @@ const RoutineMachine = ({ waypoints }) => {
       addWaypoints: false,
       draggableWaypoints: false,
       fitSelectedRoutes: true,
-      showAlternatives: false
+      showAlternatives: false,
+      createMarker: (waypoint) => {
+        return L.marker(waypoint.latLng, { icon: blueIcon })
+      }
     }).addTo(map)
 
     return () => {
