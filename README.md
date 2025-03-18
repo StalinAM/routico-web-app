@@ -1,48 +1,33 @@
-# Astro Starter Kit: Basics
+# Routico
 
-```sh
-npm create astro@latest -- --template basics
-```
+**Routico** es una aplicación web diseñada para optimizar la planificación y gestión de rutas de entrega. Permite la creación y administración de conductores, asignación de rutas personalizadas y seguimiento eficiente de las entregas.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+#### Panel Administrativo
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+![](./src/assets/admin.webp)
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+#### Panel Conductor
 
-## 🚀 Project Structure
+<div style="display:flex; gap:8px">
+<img width=250 src="./src/assets/driver_panel.webp"/>
 
-Inside of your Astro project, you'll see the following folders and files:
+<img width=250 src="./src/assets/driver_route.webp"/>
+</div>
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Características
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- **Interfaz Amigable:** Diseñada para ser fácil de usar tanto en escritorio como en dispositivos móviles.
+- **Gestión de rutas personalizadas**: Crea, edita y asigna rutas según las necesidades de entrega.
+- **Administración de conductores**: Registra y gestiona conductores con credenciales seguras.
+- **Mapas interactivos:** Visualización de rutas en mapas dinámicos.
+- **Historial de rutas:** Registro de rutas anteriores para referencia futura.
+- **Generador de credenciales:** Genera usuario y contraseña para que los conductores accedan al panel de conductor y ver las rutas asignadas.
 
-## 🧞 Commands
+## Herramientas
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [Astro](https://astro.build/)
+- [React](https://react.dev/)
+- [Firebase](https://firebase.google.com/?hl=es-419)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Leaflet](https://leafletjs.com/)
+- [Vercel](https://vercel.com)
